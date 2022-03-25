@@ -1,0 +1,76 @@
+.sm-card-fav:hover {
+  border: 0;
+}
+.sm-card-flex-rating {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 1.4rem;
+}
+.sm-card-flex-rating .sm-card-rating {
+  margin-left: 0;
+  color: var(--COLOR-HEADER-FONT-DARK);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
+}
+.sm-card-info .sm-card-info-price {
+  font-weight: 800;
+  gap: 10px;
+  grid-gap: 10px;
+}
+
+.sm-card-info .sm-card-info-price-save {
+  padding: 3px;
+}
+
+.sm-card .sm-card-content {
+  padding: 5px;
+}
+
+.sm-card .sm-card-content .sm-card-info {
+  padding: 0;
+  gap: 3px;
+}
+
+.sm-card-fav {
+  border: 0;
+  color: var(--COLOR-PRIMARY);
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  font-size: 3rem;
+  width: fit-content;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+  background: none;
+}
+
+.sm-card-fav i {
+  min-width: 1em;
+  min-height: 1em;
+  display: grid;
+  place-content: center;
+}
+
+.sm-card-fav:hover {
+  border: 0;
+}
+
+.sm-card-fav:active {
+  transform: scale(0.9);
+}
+
+.sm-link-new-check {
+  width: 100%;
+}
+
+.sm-card-rating-dot {
+  height: 3px;
+  width: 3px;
+  background-color: var(--COLOR-HEADER-FONT-DARK);
+  border-radius: 50%;
+  display: inline-block;
+}

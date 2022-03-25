@@ -1,0 +1,10 @@
+export { AuthIcon } from "./AuthIcon";
+export { BarsIcon } from "./BarsIcon";
+export { HistoryIcon } from "./HistoryIcon";
+export { WatchLaterIcon } from "./WatchLaterIcon";
+export { LightDarkIcon } from "./LightDarkIcon";
+export { HomeIcon } from "./HomeIcon";
+export { LikeIcon } from "./LikeIcon";
+export { AddToPlaylistIcon } from "./AddToPlaylistIcon";
+export { AddWatchLaterIcon } from "./AddWatchLaterIcon";
+export { PlaylistsIcon } from "./PlaylistsIcon";

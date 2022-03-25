@@ -1,0 +1,4 @@
+@import "./core.css";
+@import "./utilities.css";
+@import "./components/header/header.css";
+@import "./components/footer/footer.css";
