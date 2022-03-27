@@ -1,0 +1,14 @@
+.page404 {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--COLOR-HEADER-FONT-DARK);
+}
+
+.page404-section {
+  text-align: center;
+  padding: 1rem;
+}
