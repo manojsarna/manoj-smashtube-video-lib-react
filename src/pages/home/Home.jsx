@@ -1,12 +1,35 @@
-import { Carousel, Category } from "./components";
-import { categories } from "../../data/category-data";
 import "./home.css";
-
+import axios from "axios";
+import { Carousel, Category } from "./components";
 import { useDocTitle } from "../../hooks/useDocTitle";
-import { videos } from "../../data/video-data";
 import { Card } from "../../components";
+import { useState, useEffect } from "react";
 
 export function Home() {
+  const [categoryData, setCategoryData] = useState([]);
+  useEffect(() => {
+    (async function () {
+      try {
+        const { data } = await axios.get("/api/categories");
+        setCategoryData(data.categories);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, []);
+
+  const [videos, setVideos] = useState([]);
+  useEffect(() => {
+    (async function () {
+      try {
+        const { data } = await axios.get("/api/videos");
+        setVideos(data.videos);
+      } catch (error) {
+        console.log("error", error);
+      }
+    })();
+  }, []);
+
   const topVideos = videos.filter((video) => video.snippet.tag === "Top");
   useDocTitle("Home - SmashTube - Manoj Sarna");
   return (
@@ -15,7 +38,7 @@ export function Home() {
       <div className="sm-main-categories">
         <h2>Most Watched Categories</h2>
         <div className="sm-main-cat-container">
-          {categories.map((category) => (
+          {categoryData.map((category) => (
             <Category key={category._id} categoryItem={category} />
           ))}
         </div>
