@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import { makeServer } from "./server";
 import { BrowserRouter as Router } from "react-router-dom";
-import { ThemeProvider } from "./context/theme-context/theme-context";
+import { ThemeProvider } from "./context";
 
 // Call make Server
 makeServer();

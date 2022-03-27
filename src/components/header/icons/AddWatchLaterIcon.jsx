@@ -1,9 +1,25 @@
-export function AddWatchLaterIcon() {
+import { useWatchLater } from "../../../context";
+
+export function AddWatchLaterIcon({ videoDetails }) {
+  const { watchLater, toggleWatchLater } = useWatchLater();
+  console.log("in icon", watchLater);
+  const videoInWatchLater = watchLater.some((v) => v._id === videoDetails._id)
+    ? true
+    : false;
   return (
-    <button className="sm-icon-btn color-dm sm-icon-btn-primary">
-      <div className="icon">
-        <i className="far fa-clock"></i>
-        <span>{"  "}Add</span>
+    <button
+      className="sm-icon-btn color-dm sm-icon-btn-primary"
+      onClick={() => toggleWatchLater(videoDetails)}
+      title={`${
+        videoInWatchLater ? "Remove From Watch Later" : "Add To Watch Later"
+      }`}
+    >
+      <div className="icon icon-video">
+        <i className={`fa-clock ${videoInWatchLater ? "fas" : "far"}`}></i>
+        <span>
+          {"  "}
+          WATCH
+        </span>
       </div>
     </button>
   );
