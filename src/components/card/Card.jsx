@@ -1,15 +1,17 @@
 import "./card.css";
 import { formatDate } from "../../hooks/formatDate";
 import { NavLink } from "react-router-dom";
-import { useHistory, useWatchLater } from "../../context";
+import { useHistory, useLikes, useWatchLater } from "../../context";
 
 export function Card({ video, type }) {
   const { addToHistory, deleteFromHistory } = useHistory();
-  const { watchLater, toggleWatchLater } = useWatchLater();
+  const { watchLater, addToWatchLater, removeFromWatchLater } = useWatchLater();
+  const { likes, addToLikes, removeFromLikes } = useLikes();
 
-  const videoInWatchLater = watchLater.some((v) => v._id === video._id)
+  const videoInWatchLater = watchLater?.some((v) => v._id === video._id)
     ? true
     : false;
+  const videoInLikes = likes?.some((v) => v._id === video._id) ? true : false;
   return (
     <div className="sm-card">
       <div className="sm-card-img">
@@ -32,13 +34,47 @@ export function Card({ video, type }) {
                 ? "Remove From Watch Later"
                 : "Add To Watch Later"
             }`}
-            onClick={() => toggleWatchLater(video)}
+            onClick={
+              videoInWatchLater
+                ? () => {
+                    removeFromWatchLater(video);
+                  }
+                : () => {
+                    addToWatchLater(video);
+                  }
+            }
           >
             <i className={`fa-clock ${videoInWatchLater ? "fas" : "far"}`}></i>
           </button>
         )}
 
         <span className="sm-card-bage-time">7:52</span>
+
+        <button
+          className="sm-card-bage-like-btn"
+          title={`${
+            videoInLikes ? "Remove From Liked Videos" : "Add To Liked Videos"
+          }`}
+          onClick={
+            videoInLikes
+              ? () => {
+                  removeFromLikes(video);
+                }
+              : () => {
+                  addToLikes(video);
+                }
+          }
+        >
+          <i className={`fa-thumbs-up ${videoInLikes ? "fas" : "far"}`}></i>
+        </button>
+
+        {/* <button
+          className="sm-card-badge-playlist-btn"
+          title={`Add To Playlists`}
+        >
+          <i className={`fa-list-alt ${videoInLikes ? "fas" : "far"}`}></i>
+        </button> */}
+
         <img src={video.snippet.thumbnails.standard.url} alt="badminton" />
       </div>
       <div className="sm-card-content">

@@ -12,18 +12,22 @@ export function CategoryPage() {
   const [loading, setLoading] = useState();
 
   useEffect(() => {
+    let timeout;
     (async () => {
       try {
         setLoading(true);
         const response = await axios.get(`/api/videos`);
         if (response.status === 200) {
           setVideos(response.data.videos);
-          setLoading(false);
+          timeout = setTimeout(() => {
+            setLoading(false);
+          }, 200);
         }
       } catch (error) {
         console.log(error);
       }
     })();
+    return () => clearTimeout(timeout);
   }, [categoryId]);
 
   return loading ? (

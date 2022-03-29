@@ -7,6 +7,7 @@ import {
   CategoryPage,
   History,
   Home,
+  Likes,
   Page404,
   PlaylistPage,
   Playlists,
@@ -15,18 +16,21 @@ import {
   WatchLater,
 } from "./pages";
 import { useLogin } from "./hooks/useLogin";
+import { ToastContainer } from "./components/toast/ToastContainer";
 
 function App() {
   useLogin();
+
   return (
     <>
       <Header />
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/auth" element={<Auth />}></Route>
         <Route path="/history" element={<History />}></Route>
         <Route path="/playlists" element={<Playlists />}></Route>
-        <Route path="/playlistpage" element={<PlaylistPage />}></Route>
+        <Route path="/playlists/:playlistId" element={<PlaylistPage />}></Route>
         <Route path="/videos" element={<Videos />}></Route>
         <Route path="/videos/:videoId" element={<VideoPage />}></Route>
         <Route
@@ -34,6 +38,7 @@ function App() {
           element={<CategoryPage />}
         ></Route>
         <Route path="/watchlater" element={<WatchLater />}></Route>
+        <Route path="/likes" element={<Likes />}></Route>
         <Route path="/mockman" element={<MockAPI />}></Route>
         <Route path="*" element={<Page404 />}></Route>
       </Routes>

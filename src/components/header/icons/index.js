@@ -7,6 +7,8 @@ export { HomeIcon } from "./HomeIcon";
 export { LikeIcon } from "./LikeIcon";
 export { AddToPlaylistIcon } from "./AddToPlaylistIcon";
 export { AddWatchLaterIcon } from "./AddWatchLaterIcon";
+export { AddToLikesIcon } from "./AddToLikesIcon";
+export { LikeHeaderIcon } from "./LikeHeaderIcon";
 export { PlaylistsIcon } from "./PlaylistsIcon";
 export { PlaylistsAddNewIcon } from "./PlaylistsAddNewIcon";
 export { PlaylistAddedNewIcon } from "./PlaylistAddedNewIcon";

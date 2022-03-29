@@ -6,8 +6,8 @@ import { Card, Loader, SmashPlayer } from "../../components";
 import { videos } from "../../data/video-data";
 import { formatDate } from "../../hooks/formatDate";
 import {
+  AddToLikesIcon,
   AddWatchLaterIcon,
-  LikeIcon,
   PlaylistsAddNewIcon,
 } from "../../components/header/icons";
 import { useState, useEffect } from "react";
@@ -20,18 +20,22 @@ export function VideoPage() {
   const [videoDetails, setVideoDetails] = useState();
 
   useEffect(() => {
+    let timeout;
     (async () => {
       try {
         setLoading(true);
         const response = await axios.get(`/api/videos/${videoId}`);
         if (response.status === 200) {
           setVideoDetails(response.data.video);
-          setLoading(false);
+          timeout = setTimeout(() => {
+            setLoading(false);
+          }, 200);
         }
       } catch (error) {
         console.log(error);
       }
     })();
+    return () => clearTimeout(timeout);
   }, [videoId]);
 
   const { pathname } = useLocation();
@@ -64,7 +68,7 @@ export function VideoPage() {
               </span>
             </div>
             <div className="sm-smash-player-cta">
-              <LikeIcon />
+              <AddToLikesIcon videoDetails={videoDetails} />
               <AddWatchLaterIcon videoDetails={videoDetails} />
               <PlaylistsAddNewIcon />
             </div>
