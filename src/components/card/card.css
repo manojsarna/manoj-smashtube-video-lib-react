@@ -74,3 +74,19 @@
   border-radius: 50%;
   display: inline-block;
 }
+
+.sm-card-bage-time {
+  border: 0;
+  color: var(--COLOR-PRIMARY);
+  position: absolute;
+  bottom: 8px;
+  right: 4px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  width: -moz-fit-content;
+  width: fit-content;
+  border-radius: 10%;
+  padding: 0 3px;
+  cursor: default;
+  background: var(--COLOR-CODE-BG);
+}

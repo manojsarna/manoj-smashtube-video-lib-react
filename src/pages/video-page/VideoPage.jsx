@@ -1,18 +1,38 @@
 import { useDocTitle } from "../../hooks/useDocTitle";
+import axios from "axios";
 import "./videopage.css";
 import { useLocation, useParams } from "react-router-dom";
-import { Card, SmashPlayer } from "../../components";
+import { Card, Loader, SmashPlayer } from "../../components";
 import { videos } from "../../data/video-data";
-import { useFormatDate } from "../../hooks/useFormatDate";
-import { AddWatchLaterIcon, LikeIcon } from "../../components/header/icons";
-import { useEffect } from "react";
+import { formatDate } from "../../hooks/formatDate";
+import {
+  AddWatchLaterIcon,
+  LikeIcon,
+  PlaylistsAddNewIcon,
+} from "../../components/header/icons";
+import { useState, useEffect } from "react";
 
 export function VideoPage() {
   useDocTitle("Video Page - SmashTube - Manoj Sarna");
+
   const { videoId } = useParams();
-  const videoDetails = videos.find(
-    (video) => video.snippet.resourceId.videoId === videoId
-  );
+  const [loading, setLoading] = useState(true);
+  const [videoDetails, setVideoDetails] = useState();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(`/api/videos/${videoId}`);
+        if (response.status === 200) {
+          setVideoDetails(response.data.video);
+          setLoading(false);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, [videoId]);
 
   const { pathname } = useLocation();
 
@@ -22,27 +42,50 @@ export function VideoPage() {
 
   const topVideos = videos.filter((video) => video.snippet.tag === "Top");
 
-  return (
+  return loading ? (
+    <Loader show={loading} />
+  ) : (
     <main className="sm-main-video-page">
       <div className="sm-video-container">
         <div className="sm-video-container-main">
-          <SmashPlayer videoId={videoId} />
+          <SmashPlayer videoId={videoId} videoDetails={videoDetails} />
+          <div className="sm-smash-player-title">
+            {videoDetails.snippet.title}
+          </div>
           <div className="sm-smash-player-cta-info">
             <div className="sm-smash-player-info">
               <span className="sm-smash-player-info-views">
                 {videoDetails.snippet.viewsCount} views
               </span>
-              &nbsp;&nbsp;<span className="sm-smash-player-info-dot"></span>
-              &nbsp;&nbsp;
+              <span className="sm-smash-player-info-dot"></span>
+
               <span className="sm-smash-player-info-date">
-                {useFormatDate(videoDetails.snippet.publishedAt)}
+                {formatDate(videoDetails.snippet.publishedAt)}
               </span>
             </div>
             <div className="sm-smash-player-cta">
               <LikeIcon />
-              <AddWatchLaterIcon />
+              <AddWatchLaterIcon videoDetails={videoDetails} />
+              <PlaylistsAddNewIcon />
             </div>
           </div>
+        </div>
+        <div className="sm-smash-player-channel-avatar">
+          <div className="avatar s-s">
+            <img
+              src="https://user-images.githubusercontent.com/45617406/160282060-80f5ed68-d389-439e-8978-bde506f1c7ac.png"
+              alt="badminton"
+            />
+          </div>
+          <div className="sm-smash-player-channel-name">
+            <span className="fw-700">
+              {videoDetails.snippet.videoOwnerChannelTitle}
+            </span>
+            <span>983K subscribers</span>
+          </div>
+        </div>
+        <div className="sm-video-container-main-desc">
+          {videoDetails.snippet.description}
         </div>
       </div>
       <div className="sm-video-side-featured">

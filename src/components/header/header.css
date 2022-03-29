@@ -69,6 +69,10 @@
   font-size: 1.2rem;
 }
 
+.icon .icon-hide {
+  display: none;
+}
+
 .btn-logged-in-user,
 .btn-dark-mode {
   font-size: 3rem;

@@ -1,9 +1,9 @@
 import "./smashplayer.css";
-export function SmashPlayer({ videoId }) {
+export function SmashPlayer({ videoId, videoDetails }) {
   const videoEmbed = "https://www.youtube.com/embed/";
-  const videoSrc = `${videoEmbed}${videoId}`;
+  const videoSrc = `${videoEmbed}${videoId}?autoplay=1`;
   return (
-    <>
+    <div>
       <iframe
         className="sm-player-iframe"
         src={videoSrc}
@@ -14,6 +14,6 @@ export function SmashPlayer({ videoId }) {
         }
         allowFullScreen
       ></iframe>
-    </>
+    </div>
   );
 }

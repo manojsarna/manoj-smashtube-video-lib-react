@@ -28,7 +28,7 @@ export function Carousel() {
           <button
             id="carousel-btn"
             className="shop-now-hover btn btn-primary btn-bold"
-            title="CheckOut Product Listings"
+            title="Go To Videos"
           >
             <i className="fas fa-play"></i> &nbsp;Watch Now
           </button>

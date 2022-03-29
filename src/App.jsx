@@ -14,8 +14,10 @@ import {
   Videos,
   WatchLater,
 } from "./pages";
+import { useLogin } from "./hooks/useLogin";
 
 function App() {
+  useLogin();
   return (
     <>
       <Header />
@@ -26,8 +28,11 @@ function App() {
         <Route path="/playlists" element={<Playlists />}></Route>
         <Route path="/playlistpage" element={<PlaylistPage />}></Route>
         <Route path="/videos" element={<Videos />}></Route>
-        <Route path="/video/:videoId" element={<VideoPage />}></Route>
-        <Route path="/videos/:category" element={<CategoryPage />}></Route>
+        <Route path="/videos/:videoId" element={<VideoPage />}></Route>
+        <Route
+          path="/categories/:categoryId"
+          element={<CategoryPage />}
+        ></Route>
         <Route path="/watchlater" element={<WatchLater />}></Route>
         <Route path="/mockman" element={<MockAPI />}></Route>
         <Route path="*" element={<Page404 />}></Route>
