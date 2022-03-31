@@ -1,5 +1,6 @@
 // import { useLocation } from "react-router-dom";
 import { useState } from "react";
+
 import {
   AuthIcon,
   BarsIcon,
@@ -13,8 +14,6 @@ import { Logo } from "./logo/Logo";
 import { Search } from "./search/Search";
 
 export function Header() {
-  // const currentPath = useLocation();
-
   const [showMobileIcons, setShowMobileIcons] = useState(false);
   return (
     <header className="sm-header">

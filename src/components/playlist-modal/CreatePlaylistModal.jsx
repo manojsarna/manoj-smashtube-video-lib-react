@@ -20,11 +20,15 @@ export function CreatePlaylistModal({ show, setShow }) {
 
         <div className="sm-playlist-input-container">
           <input
+            ref={(input) => {
+              input && input.focus();
+            }}
             type="text"
             className="input-basic"
             name="playlist-name-input"
             placeholder="Enter Name"
             maxLength="15"
+            value={playlistItem.title}
             onChange={(e) =>
               setPlaylistItem((prev) => {
                 return { ...prev, title: e.target.value };
@@ -37,6 +41,9 @@ export function CreatePlaylistModal({ show, setShow }) {
             onClick={() => {
               addToPlaylists(playlistItem);
               setShow((p) => !p);
+              setPlaylistItem((prev) => {
+                return { ...prev, title: "" };
+              });
             }}
           >
             Create Playlist

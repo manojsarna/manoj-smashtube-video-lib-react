@@ -1,12 +1,26 @@
+import { useState, useEffect } from "react";
+
+import { usePlaylists } from "../../context";
 import "./playlistmodal.css";
-export function PlaylistModal({ show, setShow }) {
-  const play = [
-    { title: "Playlist 1", videocount: 10, _id: 1 },
-    { title: "Playlist 2", videocount: 12, _id: 2 },
-    { title: "Playlist 3", videocount: 13, _id: 3 },
-    { title: "Playlist 4", videocount: 15, _id: 4 },
-    { title: "Playlist 5", videocount: 11, _id: 5 },
-  ];
+export function PlaylistModal({ show, setShow, video }) {
+  const [showDiv, setShowDiv] = useState(false);
+  const [playlistItem, setPlaylistItem] = useState({ title: "" });
+  const { playlists, addToPlaylists, removeFromPlaylist, addToPlaylist } =
+    usePlaylists();
+  const [playlistArr, setPlaylistArr] = useState([]);
+
+  useEffect(() => {
+    setPlaylistArr(
+      playlists.reduce(
+        (acc, cur) =>
+          cur.videos.some((v) => v._id === video._id)
+            ? [...acc, cur]
+            : [...acc],
+        []
+      )
+    );
+  }, [playlists, video]);
+
   return (
     <div className={`sm-modal-main ${show ? "sm-modal-main-show" : ""}`}>
       <div className="sm-modal-content">
@@ -19,34 +33,87 @@ export function PlaylistModal({ show, setShow }) {
           <i className="fas fa-times"></i>
         </button>
         <div className="sm-modal-title fw-700">My Playlists</div>
-        <div className="sm-modal-playlist-container">
+        <div
+          className={`sm-modal-playlist-container ${
+            playlists.length === 0 ? "sm-playlist-container-hide" : ""
+          }`}
+        >
           <ul className="sm-modal-playilst-wrapper">
-            {play.map((item, index) => (
-              <li key={index} className="sm-playlist-item">
+            {playlists.map((item) => (
+              <li key={item._id} className="sm-playlist-item">
                 <input
-                  value={item}
                   type="checkbox"
                   maxLength="20"
                   className="item-checkbox"
+                  checked={playlistArr.some((p) => p._id === item._id)}
+                  title={
+                    playlistArr.some((p) => p._id === item._id)
+                      ? `Remove from ${item.title}`
+                      : `Add to ${item.title}`
+                  }
+                  onChange={
+                    playlistArr.some((p) => p._id === item._id)
+                      ? () => {
+                          removeFromPlaylist(item._id, video._id);
+                          //setShow((p) => !p);
+                        }
+                      : () => {
+                          addToPlaylist(item._id, video);
+                          //setShow((p) => !p);
+                        }
+                  }
                 />
-                <span className="item-name">{item}</span>
+                <span className="item-name">{item.title}</span>
               </li>
             ))}
           </ul>
         </div>
 
-        <div className="sm-playlist-input-container sm-input-box-hide ">
+        <div
+          className={`sm-playlist-input-container ${
+            showDiv ? "" : "sm-input-box-hide"
+          }`}
+        >
           <input
+            ref={(input) => {
+              input && input.focus();
+            }}
             type="text"
             className="input-basic"
             name="playlist-name-input"
             placeholder="Enter Name"
+            maxLength="15"
+            value={playlistItem.title}
+            onChange={(e) =>
+              setPlaylistItem((prev) => {
+                return { ...prev, title: e.target.value };
+              })
+            }
           />
-          <button className="btn btn-primary btn-bold">Create</button>
+          <button
+            className="btn btn-primary btn-bold"
+            disabled={playlistItem.title === "" ? true : false}
+            onClick={() => {
+              addToPlaylists(playlistItem, video);
+              setShow((p) => !p);
+              setShowDiv((p) => !p);
+              setPlaylistItem((prev) => {
+                return { ...prev, title: "" };
+              });
+            }}
+          >
+            Create Playlist
+          </button>
         </div>
 
         <div className="create-playlist-btn-container">
-          <button className=" sm-btn-create-playlist-btn">
+          <button
+            className={`sm-btn-create-playlist-btn ${
+              showDiv ? "sm-input-box-hide" : ""
+            }`}
+            title="Create New Playlist"
+            onClick={() => setShowDiv((p) => !p)}
+          >
             <i className="fas fa-plus"></i>Create New Playlist
           </button>
         </div>

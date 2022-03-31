@@ -10,28 +10,40 @@ const usePlaylists = () => useContext(PlaylistsContext);
 function PlaylistsProvider({ children }) {
   const encodedToken = localStorage.getItem("smashTubeToken");
   const [playlists, setPlaylists] = useState([]);
-  const [playlist, setPlaylist] = useState([]);
+  const [playlist, setPlaylist] = useState();
   const { dispatch } = useToast();
 
   useEffect(() => {
     (async function () {
-      try {
-        const playlistsResponse = await axios.get("/api/user/playlists", {
-          headers: {
-            authorization: encodedToken,
-          },
-        });
+      if (encodedToken) {
+        try {
+          const playlistsResponse = await axios.get("/api/user/playlists", {
+            headers: {
+              authorization: encodedToken,
+            },
+          });
 
-        if (playlistsResponse.status === 200) {
-          setPlaylists(playlistsResponse.data.playlists);
+          if (playlistsResponse.status === 200) {
+            setPlaylists(playlistsResponse.data.playlists);
+          }
+        } catch (error) {
+          console.error(error.response.data.errors);
         }
-      } catch (error) {
-        console.error(error.response.data.errors);
       }
     })();
-  }, [encodedToken]);
 
-  const addToPlaylists = async (playlist) => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [encodedToken, playlist]);
+
+  // useEffect(() => {
+  //   console.log(playlists);
+  //   console.log(playlists);
+  // }, [playlists, playlist]);
+  /**
+   *
+   * addToPlaylists : This API call will create a new playlist
+   */
+  const addToPlaylists = async (playlist, video = null) => {
     try {
       const response = await axios.post(
         "/api/user/playlists",
@@ -44,32 +56,36 @@ function PlaylistsProvider({ children }) {
       );
 
       if (response.status === 201) {
-        setPlaylists(response.data.playlists);
-        console.log("in add to playlists", response);
         dispatch({
           type: "TOAST_SUCCESS",
           payload: "Added to Playlists",
         });
+        if (video !== null) {
+          setTimeout(() => {
+            addToPlaylist(response.data.playlists.slice(-1)[0]._id, video);
+          }, 50);
+        }
+        setPlaylists(response.data.playlists);
       }
     } catch (error) {
       console.error(error.response.data.errors);
       dispatch({ type: "TOAST_ERROR", payload: error.response.data.errors });
     }
   };
-
-  const removeFromPlaylists = async (playlist) => {
+  /**
+   *
+   * removeFromPlaylists : This API call will remove playlist from Playlists Array
+   */
+  const removeFromPlaylists = async (playlistId) => {
     try {
-      const response = await axios.delete(
-        `/api/user/playlists/${playlist._id}`,
-        {
-          headers: {
-            authorization: encodedToken,
-          },
-        }
-      );
+      const response = await axios.delete(`/api/user/playlists/${playlistId}`, {
+        headers: {
+          authorization: encodedToken,
+        },
+      });
       if (response.status === 200) {
         setPlaylists(response.data.playlists);
-        console.log("in remove playlists", response);
+
         dispatch({
           type: "TOAST_SUCCESS",
           payload: "Removed from Playlists",
@@ -91,11 +107,6 @@ function PlaylistsProvider({ children }) {
 
       if (response.status === 200) {
         setPlaylist(response.data.playlist);
-        console.log("in add to particular playlist", response);
-        dispatch({
-          type: "TOAST_SUCCESS",
-          payload: `Added to ${playlist.name}`,
-        });
       }
     } catch (error) {
       console.error(error.response.data.errors);
@@ -103,23 +114,27 @@ function PlaylistsProvider({ children }) {
     }
   };
 
-  const addToPlaylist = async (playlistId, video) => {
+  /**
+   *
+   * addToPlaylist : This API call will add video to the particular playlist using playlistId
+   */
+  const addToPlaylist = async (playlistId, item) => {
     try {
       const response = await axios.post(
         `/api/user/playlists/${playlistId}`,
-        { video },
+        { video: item },
         {
           headers: {
             authorization: encodedToken,
           },
         }
       );
-      if (response.status === 201) {
+      if (response.status === 200 || response.status === 201) {
         setPlaylist(response.data.playlist);
-        console.log("in add to particular playlist", response);
+
         dispatch({
           type: "TOAST_SUCCESS",
-          payload: `Added to ${playlist.name}`,
+          payload: `Added to ${response.data.playlist.title}`,
         });
       }
     } catch (error) {
@@ -127,7 +142,10 @@ function PlaylistsProvider({ children }) {
       dispatch({ type: "TOAST_ERROR", payload: error.response.data.errors });
     }
   };
-
+  /**
+   *
+   * removeFromPlaylist : This API call will remove video from particular playlist using playlistId
+   */
   const removeFromPlaylist = async (playlistId, videoId) => {
     try {
       const response = await axios.delete(
@@ -139,12 +157,11 @@ function PlaylistsProvider({ children }) {
         }
       );
 
-      if (response.status === 201) {
+      if (response.status === 200) {
         setPlaylist(response.data.playlist);
-        console.log("in add to particular playlist", response);
         dispatch({
           type: "TOAST_SUCCESS",
-          payload: `Added to ${playlist.name}`,
+          payload: `Removed from ${response.data.playlist.title}`,
         });
       }
     } catch (error) {
@@ -156,6 +173,7 @@ function PlaylistsProvider({ children }) {
   return (
     <PlaylistsContext.Provider
       value={{
+        playlist,
         playlists,
         addToPlaylists,
         removeFromPlaylists,

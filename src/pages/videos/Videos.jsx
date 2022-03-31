@@ -3,6 +3,7 @@ import axios from "axios";
 import { Card, Loader } from "../../components";
 import { useDocTitle } from "../../hooks/useDocTitle";
 import { useState, useEffect } from "react";
+//import { useLocation } from "react-router-dom";
 
 export function Videos() {
   useDocTitle("Videos - SmashTube - Manoj Sarna");
@@ -11,6 +12,11 @@ export function Videos() {
   const [curCat, setCurCat] = useState("all");
   const [fVid, SetFVid] = useState([]);
   const [loading, setLoading] = useState();
+  // const { pathname } = useLocation();
+
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, [pathname]);
 
   useEffect(() => {
     (async function () {
@@ -23,7 +29,7 @@ export function Videos() {
         setCategories(data1.categories);
         setLoading(false);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     })();
   }, []);

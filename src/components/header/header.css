@@ -121,6 +121,10 @@
   display: none;
 }
 
+.sm-nav-icon-active {
+  border-top: 1px solid var(--COLOR-HEADER-FONT-DARK);
+  border-radius: 0;
+}
 /* HEADER ENDS */
 
 /* MEDIA QUERIES FOR HEADERS*/
@@ -135,7 +139,7 @@
 
 @media only screen and (max-width: 768px) {
   :root {
-    font-size: 45%;
+    font-size: 46%;
   }
   .sm-nav-search {
     display: none;
@@ -189,4 +193,9 @@
     right: 1rem;
     z-index: 2;
   }
+}
+
+.sm-action-icon-btn-wrapper .sm-header-nav-user-avatar {
+  padding: 5px 10px;
+  margin-bottom: 3px;
 }

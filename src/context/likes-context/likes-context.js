@@ -14,18 +14,20 @@ function LikesProvider({ children }) {
 
   useEffect(() => {
     (async function () {
-      try {
-        const likesResponse = await axios.get("/api/user/likes", {
-          headers: {
-            authorization: encodedToken,
-          },
-        });
+      if (encodedToken) {
+        try {
+          const likesResponse = await axios.get("/api/user/likes", {
+            headers: {
+              authorization: encodedToken,
+            },
+          });
 
-        if (likesResponse.status === 200) {
-          setLikes(likesResponse.data.likes);
+          if (likesResponse.status === 200) {
+            setLikes(likesResponse.data.likes);
+          }
+        } catch (error) {
+          console.error(error.response.data.errors);
         }
-      } catch (error) {
-        console.error(error.response.data.errors);
       }
     })();
   }, [encodedToken]);
@@ -44,7 +46,7 @@ function LikesProvider({ children }) {
 
       if (response.status === 201) {
         setLikes(response.data.likes);
-        console.log("in add likes", response);
+
         dispatch({
           type: "TOAST_SUCCESS",
           payload: "Added to Liked Videos",
@@ -65,7 +67,7 @@ function LikesProvider({ children }) {
       });
       if (response.status === 200) {
         setLikes(response.data.likes);
-        console.log("in remove likes", response);
+
         dispatch({
           type: "TOAST_SUCCESS",
           payload: "Removed from Liked Videos",

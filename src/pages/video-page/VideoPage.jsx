@@ -2,7 +2,7 @@ import { useDocTitle } from "../../hooks/useDocTitle";
 import axios from "axios";
 import "./videopage.css";
 import { useLocation, useParams } from "react-router-dom";
-import { Card, Loader, SmashPlayer } from "../../components";
+import { Card, Loader, PlaylistModal, SmashPlayer } from "../../components";
 import { videos } from "../../data/video-data";
 import { formatDate } from "../../hooks/formatDate";
 import {
@@ -14,10 +14,10 @@ import { useState, useEffect } from "react";
 
 export function VideoPage() {
   useDocTitle("Video Page - SmashTube - Manoj Sarna");
-
   const { videoId } = useParams();
   const [loading, setLoading] = useState(true);
   const [videoDetails, setVideoDetails] = useState();
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     let timeout;
@@ -32,7 +32,7 @@ export function VideoPage() {
           }, 200);
         }
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     })();
     return () => clearTimeout(timeout);
@@ -70,7 +70,7 @@ export function VideoPage() {
             <div className="sm-smash-player-cta">
               <AddToLikesIcon videoDetails={videoDetails} />
               <AddWatchLaterIcon videoDetails={videoDetails} />
-              <PlaylistsAddNewIcon />
+              <PlaylistsAddNewIcon setShow={setShow} />
             </div>
           </div>
         </div>
@@ -101,6 +101,7 @@ export function VideoPage() {
           )}
         </div>
       </div>
+      <PlaylistModal show={show} setShow={setShow} video={videoDetails} />
     </main>
   );
 }

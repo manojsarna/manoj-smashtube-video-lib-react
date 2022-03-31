@@ -14,19 +14,20 @@ function HistoryProvider({ children }) {
 
   useEffect(() => {
     (async function () {
-      try {
-        const historyResponse = await axios.get("/api/user/history", {
-          headers: {
-            authorization: encodedToken,
-          },
-        });
+      if (encodedToken) {
+        try {
+          const historyResponse = await axios.get("/api/user/history", {
+            headers: {
+              authorization: encodedToken,
+            },
+          });
 
-        if (historyResponse.status === 200) {
-          console.log("in History", historyResponse);
-          setHistory(historyResponse.data.history);
+          if (historyResponse.status === 200) {
+            setHistory(historyResponse.data.history);
+          }
+        } catch (error) {
+          console.error(error.response.data.errors);
         }
-      } catch (error) {
-        console.error(error.response.data.errors);
       }
     })();
   }, [encodedToken]);
@@ -54,7 +55,6 @@ function HistoryProvider({ children }) {
       );
       if (response.status === 201) {
         setHistory(response.data.history);
-        console.log("in add history", response);
         dispatch({
           type: "TOAST_SUCCESS",
           payload: "Added to History",
@@ -79,7 +79,6 @@ function HistoryProvider({ children }) {
       });
       if (response.status === 200) {
         setHistory(response.data.history);
-        console.log("in clear history", response);
         dispatch({
           type: "TOAST_SUCCESS",
           payload: "Cleared History",
@@ -104,7 +103,6 @@ function HistoryProvider({ children }) {
       });
       if (response.status === 200) {
         setHistory(response.data.history);
-        console.log("in delete from history", response);
         dispatch({
           type: "TOAST_SUCCESS",
           payload: "Removed from History",

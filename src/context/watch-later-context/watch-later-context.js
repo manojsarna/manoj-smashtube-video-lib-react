@@ -14,18 +14,20 @@ function WatchLaterProvider({ children }) {
 
   useEffect(() => {
     (async function () {
-      try {
-        const watchLaterResponse = await axios.get("/api/user/watchlater", {
-          headers: {
-            authorization: encodedToken,
-          },
-        });
+      if (encodedToken) {
+        try {
+          const watchLaterResponse = await axios.get("/api/user/watchlater", {
+            headers: {
+              authorization: encodedToken,
+            },
+          });
 
-        if (watchLaterResponse.status === 200) {
-          setWatchLater(watchLaterResponse.data.watchlater);
+          if (watchLaterResponse.status === 200) {
+            setWatchLater(watchLaterResponse.data.watchlater);
+          }
+        } catch (error) {
+          console.error(error.response.data.errors);
         }
-      } catch (error) {
-        console.error(error.response.data.errors);
       }
     })();
   }, [encodedToken]);
@@ -44,7 +46,7 @@ function WatchLaterProvider({ children }) {
 
       if (response.status === 201) {
         setWatchLater(response.data.watchlater);
-        console.log("in add watch later", response);
+
         dispatch({
           type: "TOAST_SUCCESS",
           payload: "Added to Watch Later",
@@ -65,7 +67,7 @@ function WatchLaterProvider({ children }) {
       });
       if (response.status === 200) {
         setWatchLater(response.data.watchlater);
-        console.log("in remove watch later", response);
+
         dispatch({
           type: "TOAST_SUCCESS",
           payload: "Removed from Watch Later",

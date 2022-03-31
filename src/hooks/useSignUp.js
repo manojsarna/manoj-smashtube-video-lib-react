@@ -9,6 +9,6 @@ export const useSignUp = async () => {
     });
     localStorage.setItem("encodedToken", res.data.encodedToken);
   } catch (error) {
-    console.log(error.response);
+    console.error(error.response);
   }
 };

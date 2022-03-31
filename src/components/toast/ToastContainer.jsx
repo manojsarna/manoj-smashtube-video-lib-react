@@ -8,7 +8,6 @@ export function ToastContainer() {
   const { toastList, dispatch } = useToast();
 
   useEffect(() => {
-    console.log("in use effect");
     const timeout = setTimeout(() => {
       dispatch({
         type: "TOAST_RESET",
@@ -20,7 +19,7 @@ export function ToastContainer() {
 
   return (
     <div className="sm-toast-container">
-      {toastList.map((toast) => (
+      {[...toastList].reverse().map((toast) => (
         <Toast key={toast._id} toast={toast} />
       ))}
     </div>

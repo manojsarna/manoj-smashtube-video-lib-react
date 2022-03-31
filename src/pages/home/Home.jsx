@@ -25,7 +25,7 @@ export function Home() {
         const { data } = await axios.get("/api/videos");
         setVideos(data.videos);
       } catch (error) {
-        console.log("error", error);
+        console.error("error", error);
       }
     })();
   }, []);

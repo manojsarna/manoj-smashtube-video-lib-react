@@ -24,7 +24,7 @@ export function CategoryPage() {
           }, 200);
         }
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     })();
     return () => clearTimeout(timeout);

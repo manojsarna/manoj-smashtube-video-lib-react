@@ -6,3 +6,5 @@ export { Toast } from "./toast/Toast";
 export { PlaylistModal } from "./playlist-modal/PlaylistModal";
 export { CreatePlaylistModal } from "./playlist-modal/CreatePlaylistModal";
 export { SmashPlayer } from "./smash-player/SmashPlayer";
+export { PrivateRoute } from "./private-route/PrivateRoute";
+export { RestrictedRoute } from "./restricted-route/RestrictedRoute";

@@ -29,18 +29,51 @@
   padding: 5px;
 }
 
+.sm-card {
+  cursor: default;
+}
+
 .sm-card .sm-card-content .sm-card-info {
   padding: 0;
   gap: 3px;
 }
 
-.sm-card-fav {
+.sm-card-fav-watch {
   border: 0;
   color: var(--COLOR-PRIMARY);
   position: absolute;
-  top: 1px;
+  border-radius: 50%;
+  bottom: -1px;
+  right: 4.5rem;
+  font-size: 2.8rem;
+  width: fit-content;
+  padding: 5px;
+  cursor: pointer;
+  background: none;
+}
+
+.sm-card-fav-watch i {
+  min-width: 1em;
+  min-height: 1em;
+  display: grid;
+  place-content: center;
+}
+
+.sm-card-fav-watch:hover {
+  border: 0;
+}
+
+.sm-card-fav-watch:active {
+  transform: scale(0.9);
+}
+
+.sm-card-fav-delete {
+  border: 0;
+  color: var(--COLOR-PRIMARY);
+  position: absolute;
+  top: -1px;
   right: 1px;
-  font-size: 3rem;
+  font-size: 2.6rem;
   width: fit-content;
   border-radius: 50%;
   padding: 5px;
@@ -48,18 +81,18 @@
   background: none;
 }
 
-.sm-card-fav i {
+.sm-card-fav-delete i {
   min-width: 1em;
   min-height: 1em;
   display: grid;
   place-content: center;
 }
 
-.sm-card-fav:hover {
+.sm-card-fav-delete:hover {
   border: 0;
 }
 
-.sm-card-fav:active {
+.sm-card-fav-delete:active {
   transform: scale(0.9);
 }
 
@@ -67,12 +100,12 @@
   border: 0;
   color: var(--COLOR-PRIMARY);
   position: absolute;
-  bottom: 1px;
+  border-radius: 50%;
+  bottom: -1px;
   right: 1px;
-  font-size: 3rem;
+  font-size: 2.8rem;
   width: -moz-fit-content;
   width: fit-content;
-  border-radius: 50%;
   padding: 5px;
   cursor: pointer;
   background: none;
@@ -121,16 +154,37 @@
   background: var(--COLOR-CODE-BG);
 }
 
-/* .sm-card-badge-playlist-btn {
+.sm-card .sm-card-img {
+  padding: 1.4rem 0;
+  background: var(--COLOR-BLACK);
+}
+
+.sm-card-badge-playlist-btn {
   border: 0;
   color: var(--COLOR-PRIMARY);
   position: absolute;
-  bottom: -2px;
-  left: 5px;
+  border-radius: 50%;
+  bottom: 3px;
+  right: 9.5rem;
   font-size: 3rem;
   width: -moz-fit-content;
   width: fit-content;
   padding: 0;
   cursor: pointer;
   background: none;
-} */
+}
+
+.sm-card-badge-playlist-btn i {
+  min-width: 1em;
+  min-height: 1em;
+  display: grid;
+  place-content: center;
+}
+
+.sm-card-badge-playlist-btn:hover {
+  border: 0;
+}
+
+.sm-card-badge-playlist-btn:active {
+  transform: scale(0.9);
+}

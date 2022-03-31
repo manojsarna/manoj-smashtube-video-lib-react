@@ -9,3 +9,4 @@ export { Videos } from "./videos/Videos";
 export { WatchLater } from "./watchlater/WatchLater";
 export { Likes } from "./likes/Likes";
 export { CategoryPage } from "./category-page/CategoryPage";
+export { User } from "./user/User";

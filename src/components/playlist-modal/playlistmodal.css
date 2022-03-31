@@ -1,3 +1,7 @@
+.sm-modal-main {
+  z-index: 58;
+}
+
 .sm-modal-content .sm-card-dismiss:hover {
   border: 0;
 }
@@ -39,9 +43,9 @@
   color: var(--COLOR-BLACK);
   background: var(--COLOR-DARKEN-1);
   border: 0;
-  padding: 5px 10px;
-  margin: 5px;
-
+  padding: 10px;
+  margin: 12px;
+  font-weight: 700;
   white-space: nowrap;
   border-radius: 5px;
   transition: all ease-in 0.2s;
@@ -99,9 +103,18 @@
 .sm-playlist-item .item-checkbox {
   width: 1.5em;
   height: 1.5em;
+  cursor: pointer;
 }
 
 .sm-playlist-item .item-name {
   font-size: 2rem;
   font-weight: 700;
+}
+
+.sm-modal-content .sm-playlist-container-hide {
+  display: none;
+}
+
+.sm-playlist-input-container .input-basic:focus {
+  border: 2px solid var(--COLOR-PRIMARY);
 }

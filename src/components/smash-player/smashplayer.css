@@ -1,4 +1,5 @@
 .sm-player-iframe {
   width: 100%;
   height: 48rem;
+  border-radius: 10px;
 }

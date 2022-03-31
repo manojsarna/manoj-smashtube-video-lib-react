@@ -7,6 +7,6 @@ export const useLogin = async () => {
     });
     localStorage.setItem("smashTubeToken", res.data.encodedToken);
   } catch (error) {
-    console.log(error.response);
+    console.error(error.response);
   }
 };

@@ -11,3 +11,4 @@ export {
   PlaylistsProvider,
   usePlaylists,
 } from "./playlists-context/playlists-context";
+export { AuthProvider, useAuth } from "./auth-context/auth-context";
