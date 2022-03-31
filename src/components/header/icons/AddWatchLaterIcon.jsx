@@ -1,7 +1,7 @@
 import { useWatchLater } from "../../../context";
 
 export function AddWatchLaterIcon({ videoDetails }) {
-  const { watchLater, toggleWatchLater } = useWatchLater();
+  const { watchLater, addToWatchLater, removeFromWatchLater } = useWatchLater();
   console.log("in icon", watchLater);
   const videoInWatchLater = watchLater.some((v) => v._id === videoDetails._id)
     ? true
@@ -9,7 +9,15 @@ export function AddWatchLaterIcon({ videoDetails }) {
   return (
     <button
       className="sm-icon-btn color-dm sm-icon-btn-primary"
-      onClick={() => toggleWatchLater(videoDetails)}
+      onClick={
+        videoInWatchLater
+          ? () => {
+              removeFromWatchLater(videoDetails);
+            }
+          : () => {
+              addToWatchLater(videoDetails);
+            }
+      }
       title={`${
         videoInWatchLater ? "Remove From Watch Later" : "Add To Watch Later"
       }`}

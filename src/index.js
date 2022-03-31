@@ -4,7 +4,14 @@ import "./index.css";
 import App from "./App";
 import { makeServer } from "./server";
 import { BrowserRouter as Router } from "react-router-dom";
-import { ThemeProvider } from "./context";
+import {
+  HistoryProvider,
+  LikesProvider,
+  PlaylistsProvider,
+  ThemeProvider,
+  ToastProvider,
+  WatchLaterProvider,
+} from "./context";
 
 // Call make Server
 makeServer();
@@ -12,9 +19,19 @@ makeServer();
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider>
-      <Router>
-        <App />
-      </Router>
+      <ToastProvider>
+        <PlaylistsProvider>
+          <HistoryProvider>
+            <LikesProvider>
+              <WatchLaterProvider>
+                <Router>
+                  <App />
+                </Router>
+              </WatchLaterProvider>
+            </LikesProvider>
+          </HistoryProvider>
+        </PlaylistsProvider>
+      </ToastProvider>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")

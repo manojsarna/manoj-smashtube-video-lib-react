@@ -5,8 +5,7 @@ export const useLogin = async () => {
       email: "adarshbalika@gmail.com",
       password: "adarshBalika123",
     });
-    console.log(res);
-    localStorage.setItem("encodedToken", res.data.encodedToken);
+    localStorage.setItem("smashTubeToken", res.data.encodedToken);
   } catch (error) {
     console.log(error.response);
   }

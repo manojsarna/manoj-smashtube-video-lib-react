@@ -1,0 +1,36 @@
+.sm-toast-container {
+  top: 8rem;
+  gap: 5px;
+}
+.sm-notification {
+  padding: 12px;
+  font-size: 1.6rem;
+}
+.sm-notification .sm-alert-icon {
+  margin: 0;
+  margin-right: 2rem;
+}
+
+.sm-toast-container .toast-hide {
+  display: none;
+}
+.sm-toast-container {
+  display: grid;
+}
+@media only screen and (max-width: 1024px) {
+  .sm-toast-container {
+    top: 8rem;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .sm-toast-container {
+    top: 14rem;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .sm-toast-container {
+    top: 13rem;
+  }
+}

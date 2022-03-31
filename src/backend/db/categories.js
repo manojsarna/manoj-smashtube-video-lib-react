@@ -8,6 +8,12 @@ import { v4 as uuid } from "uuid";
 export const categories = [
   {
     _id: uuid(),
+    categoryName: "All",
+    category: "all",
+    image: "https://i.ytimg.com/vi/h1lUXxdlKC4/maxresdefault.jpg",
+  },
+  {
+    _id: uuid(),
     categoryName: "Shots",
     category: "shots",
     image: "https://i.ytimg.com/vi/h1lUXxdlKC4/maxresdefault.jpg",

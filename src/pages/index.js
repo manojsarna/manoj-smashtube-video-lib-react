@@ -7,4 +7,5 @@ export { Playlists } from "./playlists/Playlists";
 export { VideoPage } from "./video-page/VideoPage";
 export { Videos } from "./videos/Videos";
 export { WatchLater } from "./watchlater/WatchLater";
+export { Likes } from "./likes/Likes";
 export { CategoryPage } from "./category-page/CategoryPage";

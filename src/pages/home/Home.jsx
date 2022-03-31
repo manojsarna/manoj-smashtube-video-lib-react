@@ -11,7 +11,7 @@ export function Home() {
     (async function () {
       try {
         const { data } = await axios.get("/api/categories");
-        setCategoryData(data.categories);
+        setCategoryData(data.categories.slice(1));
       } catch (error) {
         console.error(error);
       }

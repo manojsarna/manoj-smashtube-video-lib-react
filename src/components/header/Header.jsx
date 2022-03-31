@@ -1,10 +1,11 @@
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import {
   AuthIcon,
   BarsIcon,
   HistoryIcon,
   LightDarkIcon,
+  LikeHeaderIcon,
   PlaylistsIcon,
   WatchLaterIcon,
 } from "./icons";
@@ -37,6 +38,7 @@ export function Header() {
         >
           <LightDarkIcon />
           <WatchLaterIcon />
+          <LikeHeaderIcon />
           <HistoryIcon />
           <PlaylistsIcon />
           <AuthIcon />

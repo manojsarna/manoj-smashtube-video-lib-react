@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { images } from "../../../../assets/images";
-
+import "./carousel.css";
 export function Carousel() {
   const sliderImages = Object.values(images.slider);
   const [imgSrc, setImgSrc] = useState(sliderImages[0]);
@@ -24,13 +24,13 @@ export function Carousel() {
         <h1 className="sub-main-heading color-p">
           Watch Best Badminton Videos
         </h1>
-        <Link to="/videos" title="Go To Videos">
+        <Link to="/videos" title="Explore Videos">
           <button
             id="carousel-btn"
             className="shop-now-hover btn btn-primary btn-bold"
             title="Go To Videos"
           >
-            <i className="fas fa-play"></i> &nbsp;Watch Now
+            <i className="fas fa-play sm-margin-right"></i> Explore Now
           </button>
         </Link>
       </div>

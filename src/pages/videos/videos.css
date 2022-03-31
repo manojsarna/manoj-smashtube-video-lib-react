@@ -1,0 +1,28 @@
+.sm-videos-categories-container {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.sm-category-outline-btn {
+  color: var(--COLOR-HEADER-FONT-DARK);
+  background: var(--COLOR-BG);
+  border: 1px solid var(--COLOR-HEADER-FONT-DARK);
+  border-radius: 5rem;
+  font-weight: 600;
+  padding: 1rem 3rem;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background ease-in 0.2s;
+}
+
+.sm-category-outline-btn:hover {
+  color: var(--COLOR-BLACK);
+  background: var(--COLOR-HEADER-FONT-DARK);
+}
+.sm-active {
+  color: var(--COLOR-BLACK);
+  background: var(--COLOR-HEADER-FONT-DARK);
+}

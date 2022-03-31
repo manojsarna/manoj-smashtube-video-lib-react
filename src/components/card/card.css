@@ -63,6 +63,36 @@
   transform: scale(0.9);
 }
 
+.sm-card-bage-like-btn {
+  border: 0;
+  color: var(--COLOR-PRIMARY);
+  position: absolute;
+  bottom: 1px;
+  right: 1px;
+  font-size: 3rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+  background: none;
+}
+
+.sm-card-bage-like-btn i {
+  min-width: 1em;
+  min-height: 1em;
+  display: grid;
+  place-content: center;
+}
+
+.sm-card-bage-like-btn:hover {
+  border: 0;
+}
+
+.sm-card-bage-like-btn:active {
+  transform: scale(0.9);
+}
+
 .sm-link-new-check {
   width: 100%;
 }
@@ -80,7 +110,7 @@
   color: var(--COLOR-PRIMARY);
   position: absolute;
   bottom: 8px;
-  right: 4px;
+  left: 4px;
   font-size: 1.2rem;
   font-weight: 700;
   width: -moz-fit-content;
@@ -90,3 +120,17 @@
   cursor: default;
   background: var(--COLOR-CODE-BG);
 }
+
+/* .sm-card-badge-playlist-btn {
+  border: 0;
+  color: var(--COLOR-PRIMARY);
+  position: absolute;
+  bottom: -2px;
+  left: 5px;
+  font-size: 3rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 0;
+  cursor: pointer;
+  background: none;
+} */

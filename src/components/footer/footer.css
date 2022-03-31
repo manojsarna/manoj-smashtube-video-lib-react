@@ -44,7 +44,7 @@
     align-items: center;
     position: sticky;
     bottom: 0;
-    padding: 1.5rem;
+    padding: 1rem;
     border-top: 2px solid var(--COLOR-HEADER-FONT-DARK);
     transition: color ease-in 0.2s;
     background: var(--COLOR-BG);

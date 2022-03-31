@@ -3,6 +3,7 @@ import {
   HistoryIcon,
   HomeIcon,
   LightDarkIcon,
+  LikeHeaderIcon,
   PlaylistsIcon,
   WatchLaterIcon,
 } from "../header/icons";
@@ -40,6 +41,7 @@ export function Footer() {
         <LightDarkIcon />
         <HomeIcon />
         <WatchLaterIcon />
+        <LikeHeaderIcon />
         <HistoryIcon />
         <PlaylistsIcon />
         <AuthIcon />

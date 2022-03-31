@@ -1,0 +1,107 @@
+.sm-modal-content .sm-card-dismiss:hover {
+  border: 0;
+}
+
+.sm-modal-content .sm-modal-title {
+  text-align: start;
+  padding-top: 1rem;
+  font-size: 2.4rem;
+  padding: 5px 8px;
+}
+
+.sm-modal-content {
+  box-shadow: none;
+  max-width: 100%;
+  width: 38rem;
+  border: 2px solid var(--COLOR-PRIMARY);
+}
+
+.sm-modal-content .sm-card-dismiss {
+  border: 0;
+  color: var(--COLOR-HEADER-FONT-DARK);
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  font-size: 2.4rem;
+  width: fit-content;
+  border-radius: 0;
+  padding: 5px;
+  cursor: pointer;
+  background: var(--COLOR-BG);
+}
+
+.sm-btn-create-playlist-btn i {
+  margin-right: 5px;
+}
+
+.sm-btn-create-playlist-btn {
+  cursor: pointer;
+  color: var(--COLOR-BLACK);
+  background: var(--COLOR-DARKEN-1);
+  border: 0;
+  padding: 5px 10px;
+  margin: 5px;
+
+  white-space: nowrap;
+  border-radius: 5px;
+  transition: all ease-in 0.2s;
+}
+
+.sm-btn-create-playlist-btn:hover {
+  cursor: pointer;
+  background: var(--COLOR-DARKEN-HOVER-1);
+}
+
+.sm-btn-create-playlist-btn:active {
+  transform: scale(0.99);
+}
+
+.create-playlist-btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sm-playlist-input-container {
+  padding: 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+.sm-input-box-hide {
+  display: none;
+}
+
+.sm-modal-playlist-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.sm-modal-playilst-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 1rem;
+  overflow: hidden;
+}
+
+.sm-playlist-item {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.sm-playlist-item .item-checkbox {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.sm-playlist-item .item-name {
+  font-size: 2rem;
+  font-weight: 700;
+}
