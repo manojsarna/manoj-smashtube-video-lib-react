@@ -41,7 +41,7 @@ export function PlaylistPage() {
     <main className="sm-main">
       <div className="sm-main-feature-p sm-main-feat-new">
         <div className="sm-main-playlist-top">
-          <p className="sm-main-heading">{playlist.title}</p>
+          <p className="sm-main-heading">{playlist.title}'s Page</p>
           <button
             className="btn btn-primary btn-bolder create-playlist-button"
             onClick={() => {
