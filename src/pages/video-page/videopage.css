@@ -87,7 +87,10 @@
   text-align: justify;
 }
 .sm-video-side-wrapper .sm-card {
-  width: 32rem;
+  width: 30rem;
+  border: none;
+  box-shadow: none;
+  border-radius: 10px;
 }
 
 .sm-smash-player-channel-avatar {

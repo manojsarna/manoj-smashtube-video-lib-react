@@ -1,3 +1,35 @@
+.sm-card:hover {
+  border: none;
+  transform: scale(1.01);
+}
+
+.sm-main-prod-container .sm-card {
+  border: none;
+  box-shadow: none;
+  border-radius: 10px;
+}
+.sm-card .sm-card-img {
+  padding: 1.4rem 0;
+  background: var(--COLOR-BLACK);
+  border-radius: 10px;
+  border-bottom: none;
+}
+
+.sm-card .sm-card-img {
+  border-bottom: none;
+}
+.sm-card .sm-badge {
+  border-radius: 10px 0px;
+}
+
+.sm-card-img img {
+  border-radius: 10px;
+}
+
+.sm-card-img .sm-card-badge {
+  border-radius: 10px 0;
+}
+
 .sm-card-fav:hover {
   border: 0;
 }
@@ -142,21 +174,16 @@
   border: 0;
   color: var(--COLOR-PRIMARY);
   position: absolute;
-  bottom: 8px;
-  left: 4px;
+  bottom: 6px;
+  left: 6px;
   font-size: 1.2rem;
   font-weight: 700;
   width: -moz-fit-content;
   width: fit-content;
-  border-radius: 10%;
-  padding: 0 3px;
+  border-radius: 5px;
+  padding: 2px 4px;
   cursor: default;
   background: var(--COLOR-CODE-BG);
-}
-
-.sm-card .sm-card-img {
-  padding: 1.4rem 0;
-  background: var(--COLOR-BLACK);
 }
 
 .sm-card-badge-playlist-btn {
@@ -164,7 +191,7 @@
   color: var(--COLOR-PRIMARY);
   position: absolute;
   border-radius: 50%;
-  bottom: 3px;
+  bottom: 2.5px;
   right: 9.5rem;
   font-size: 3rem;
   width: -moz-fit-content;

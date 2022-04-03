@@ -2,19 +2,20 @@ import { useContext, useState, createContext } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import { useToast } from "../toast-context/toast-context";
+import { useAuth } from "../auth-context/auth-context";
 
 const HistoryContext = createContext();
 
 const useHistory = () => useContext(HistoryContext);
 
 function HistoryProvider({ children }) {
-  const encodedToken = localStorage.getItem("smashTubeToken");
   const [history, setHistory] = useState([]);
   const { dispatch } = useToast();
+  const { encodedToken } = useAuth();
 
   useEffect(() => {
-    (async function () {
-      if (encodedToken) {
+    if (encodedToken) {
+      (async function () {
         try {
           const historyResponse = await axios.get("/api/user/history", {
             headers: {
@@ -28,19 +29,9 @@ function HistoryProvider({ children }) {
         } catch (error) {
           console.error(error.response.data.errors);
         }
-      }
-    })();
+      })();
+    }
   }, [encodedToken]);
-
-  // const addToHistory = (video) => {
-  //   setHistory((prev) => {
-  //     if (prev.some((v) => v._id === video._id)) {
-  //       return prev;
-  //     } else {
-  //       return [...prev, video];
-  //     }
-  //   });
-  // };
 
   const addToHistory = async (item) => {
     try {
@@ -66,10 +57,6 @@ function HistoryProvider({ children }) {
     }
   };
 
-  // const clearHistory = () => {
-  //   setHistory([]);
-  // };
-
   const clearHistory = async (item) => {
     try {
       const response = await axios.delete("/api/user/history/all", {
@@ -89,10 +76,6 @@ function HistoryProvider({ children }) {
       dispatch({ type: "TOAST_ERROR", payload: error.response.data.errors });
     }
   };
-
-  // const deleteFromHistory = (video) => {
-  //   setHistory((prev) => prev.filter((v) => v._id !== video._id));
-  // };
 
   const deleteFromHistory = async (item) => {
     try {

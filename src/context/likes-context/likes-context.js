@@ -2,19 +2,20 @@ import { useContext, useState, createContext } from "react";
 import { useEffect } from "react";
 import { useToast } from "../toast-context/toast-context";
 import axios from "axios";
+import { useAuth } from "../auth-context/auth-context";
 
 const LikesContext = createContext();
 
 const useLikes = () => useContext(LikesContext);
 
 function LikesProvider({ children }) {
-  const encodedToken = localStorage.getItem("smashTubeToken");
+  const { encodedToken } = useAuth();
   const [likes, setLikes] = useState([]);
   const { dispatch } = useToast();
 
   useEffect(() => {
-    (async function () {
-      if (encodedToken) {
+    if (encodedToken) {
+      (async function () {
         try {
           const likesResponse = await axios.get("/api/user/likes", {
             headers: {
@@ -28,8 +29,8 @@ function LikesProvider({ children }) {
         } catch (error) {
           console.error(error.response.data.errors);
         }
-      }
-    })();
+      })();
+    }
   }, [encodedToken]);
 
   const addToLikes = async (item) => {

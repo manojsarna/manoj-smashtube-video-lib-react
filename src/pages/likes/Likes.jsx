@@ -14,7 +14,7 @@ export function Likes() {
       <div className="sm-main-feature-p">
         <h2 className="prod-heading">Liked Videos</h2>
         <div className="sm-main-prod-container">
-          {likes.length === 0 ? (
+          {likes.length === 0 && (
             <Link to="/" title="Explore Videos">
               <button
                 id="carousel-btn"
@@ -24,8 +24,6 @@ export function Likes() {
                 <i className="fas fa-play sm-margin-right"></i> Explore Now
               </button>
             </Link>
-          ) : (
-            ""
           )}
 
           {likes.map((video) => (

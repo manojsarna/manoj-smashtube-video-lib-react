@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { usePlaylists } from "../../context";
 import "./playlistmodal.css";
@@ -8,6 +9,7 @@ export function PlaylistModal({ show, setShow, video }) {
   const { playlists, addToPlaylists, removeFromPlaylist, addToPlaylist } =
     usePlaylists();
   const [playlistArr, setPlaylistArr] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setPlaylistArr(
@@ -63,7 +65,13 @@ export function PlaylistModal({ show, setShow, video }) {
                         }
                   }
                 />
-                <span className="item-name">{item.title}</span>
+                <span
+                  className="btn btn-txt item-name"
+                  title={`Go To ${item.title} Playlist`}
+                  onClick={() => navigate(`/playlists/${item._id}`)}
+                >
+                  {item.title}
+                </span>
               </li>
             ))}
           </ul>

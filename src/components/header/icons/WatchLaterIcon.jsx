@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
-import { useWatchLater } from "../../../context";
+import { useAuth, useWatchLater } from "../../../context";
 
 export function WatchLaterIcon() {
   const { watchLater } = useWatchLater();
+  const { user } = useAuth();
 
   return (
     <Link to="/watchlater" title="Go To Watch Later">
@@ -12,7 +13,11 @@ export function WatchLaterIcon() {
           <i className="fas fa-clock"></i>
           <span
             className={`icon-badge bd-red icon-bd-top-right ${
-              watchLater?.length === 0 ? "icon-hide " : ""
+              user
+                ? watchLater?.length === 0
+                  ? "icon-hide "
+                  : ""
+                : "icon-hide"
             } `}
           >
             {watchLater.length}

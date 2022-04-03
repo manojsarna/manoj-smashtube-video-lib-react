@@ -18,10 +18,13 @@
   align-items: center;
   width: fit-content;
   gap: 1rem;
-  padding: 1rem 4rem;
+  padding: 1rem 6rem;
   padding-bottom: 3rem;
   border-radius: 10px;
   border: 2px solid var(--COLOR-HEADER-FONT-DARK);
+}
+.sm-main-auth-signup {
+  padding-bottom: 2rem;
 }
 
 .auth-btn {
@@ -84,6 +87,30 @@
   display: none;
 }
 
+.input-user-firstname input:focus {
+  border: 2px solid var(--COLOR-HEADER-FONT-DARK);
+}
+
+.input-user-firstname .sm-input-error:focus {
+  border: 2px solid var(--COLOR-RED);
+}
+
+.input-user-firstname .sm-input-success {
+  border: 2px solid var(--COLOR-HEADER-FONT-DARK);
+}
+
+.input-user-lastname input:focus {
+  border: 2px solid var(--COLOR-HEADER-FONT-DARK);
+}
+
+.input-user-lastname .sm-input-error:focus {
+  border: 2px solid var(--COLOR-RED);
+}
+
+.input-user-lastname .sm-input-success {
+  border: 2px solid var(--COLOR-HEADER-FONT-DARK);
+}
+
 .input-user input:focus {
   border: 2px solid var(--COLOR-HEADER-FONT-DARK);
 }
@@ -135,6 +162,12 @@
 .auth-for-rem .test-login {
   padding: 2px;
   margin-left: auto;
+}
+.sm-main-auth-signup .sm-auth-accept {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 }
 /* MAIN ENDS */
 

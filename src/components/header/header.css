@@ -117,6 +117,10 @@
   grid-template-columns: repeat(3, 1fr);
 }
 
+.sm-nav-icon-mobile-icons.sm-nav-icon-bar:hover + .sm-icons-show {
+  display: flex;
+}
+
 .sm-nav-icon-mobile-icons {
   display: none;
 }

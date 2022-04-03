@@ -3,7 +3,6 @@ import axios from "axios";
 import "./videopage.css";
 import { useLocation, useParams } from "react-router-dom";
 import { Card, Loader, PlaylistModal, SmashPlayer } from "../../components";
-import { videos } from "../../data/video-data";
 import { formatDate } from "../../hooks/formatDate";
 import {
   AddToLikesIcon,
@@ -16,20 +15,22 @@ export function VideoPage() {
   useDocTitle("Video Page - SmashTube - Manoj Sarna");
   const { videoId } = useParams();
   const [loading, setLoading] = useState(true);
+  const [videos, setVideos] = useState();
   const [videoDetails, setVideoDetails] = useState();
   const [show, setShow] = useState(false);
-
   useEffect(() => {
     let timeout;
     (async () => {
       try {
         setLoading(true);
+        const { data } = await axios.get("/api/videos");
+        setVideos(data.videos);
         const response = await axios.get(`/api/videos/${videoId}`);
         if (response.status === 200) {
           setVideoDetails(response.data.video);
           timeout = setTimeout(() => {
             setLoading(false);
-          }, 200);
+          }, 20);
         }
       } catch (error) {
         console.error(error);
@@ -43,8 +44,6 @@ export function VideoPage() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
-
-  const topVideos = videos.filter((video) => video.snippet.tag === "Top");
 
   return loading ? (
     <Loader show={loading} />
@@ -95,10 +94,16 @@ export function VideoPage() {
       <div className="sm-video-side-featured">
         <h3 className="sm-video-side-featured-heading">Must Watch</h3>
         <div className="sm-video-side-wrapper">
-          {topVideos.map(
-            (video) =>
-              video.snippet.tag && <Card key={video.id} video={video} />
-          )}
+          {videos
+            .filter(
+              (video) =>
+                video.snippet.category === videoDetails.snippet.category &&
+                video._id !== videoDetails._id
+            )
+            .slice(0, 5)
+            .map((video) => (
+              <Card key={video.id} video={video} />
+            ))}
         </div>
       </div>
       <PlaylistModal show={show} setShow={setShow} video={videoDetails} />
