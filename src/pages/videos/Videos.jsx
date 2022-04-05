@@ -15,9 +15,7 @@ export function Videos() {
   const navigate = useNavigate();
   const [videos, setVideos] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [currentCategory, setCurrentCategory] = useState(
-    categoryString ?? "all"
-  );
+  const [currentCategory, setCurrentCategory] = useState(categoryString);
   const [filteredVideos, SetFilteredVideos] = useState([]);
   const [loading, setLoading] = useState();
   const [isSortByLatest, setIsSortByLatest] = useState(false);
@@ -28,14 +26,13 @@ export function Videos() {
         setLoading(true);
         const { data } = await axios.get("/api/videos");
         setVideos(data.videos);
-        if (categoryString) {
-          setCurrentCategory(categoryString);
-          SetFilteredVideos(
-            data.videos.filter((v) => v.snippet.category === categoryString)
-          );
-        } else {
-          SetFilteredVideos(data.videos);
+        SetFilteredVideos([
+          ...filterSortVideos(data.videos, currentCategory, isSortByLatest),
+        ]);
+        if (searchString) {
+          SetFilteredVideos([...searchVideos(data.videos, searchString)]);
         }
+
         const { data: data1 } = await axios.get("/api/categories");
         setCategories(data1.categories);
         setLoading(false);
@@ -47,14 +44,14 @@ export function Videos() {
   }, []);
 
   useEffect(() => {
-    SetFilteredVideos(searchVideos(videos, searchString));
+    SetFilteredVideos([...searchVideos(videos, searchString)]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchString]);
 
   useEffect(() => {
-    SetFilteredVideos(
-      filterSortVideos(videos, currentCategory, isSortByLatest)
-    );
+    SetFilteredVideos([
+      ...filterSortVideos(videos, currentCategory, isSortByLatest),
+    ]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentCategory, isSortByLatest]);
 
