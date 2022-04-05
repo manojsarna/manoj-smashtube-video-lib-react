@@ -150,10 +150,7 @@ export function Card({ video, type }) {
               to={`/videos/${video._id}`}
               title="Go To Video"
             >
-              <button
-                className="btn btn-primary cart-btn"
-                // onClick={() => (user ? addToHistory(video) : "")}
-              >
+              <button className="btn btn-primary cart-btn">
                 <i className="fas fa-play"></i>
                 &nbsp;&nbsp;Watch Now
               </button>

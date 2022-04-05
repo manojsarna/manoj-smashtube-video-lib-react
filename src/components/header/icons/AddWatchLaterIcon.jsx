@@ -20,15 +20,6 @@ export function AddWatchLaterIcon({ videoDetails }) {
           addToWatchLater(videoDetails);
         }
       }}
-      // onClick={
-      //   videoInWatchLater
-      //     ? () => {
-      //         removeFromWatchLater(videoDetails);
-      //       }
-      //     : () => {
-      //         addToWatchLater(videoDetails);
-      //       }
-      // }
       title={`${
         videoInWatchLater ? "Remove From Watch Later" : "Add To Watch Later"
       }`}

@@ -49,7 +49,6 @@
   align-items: center;
   font-size: 2.6rem;
   font-weight: 700;
-  /* color: var(--COLOR-HEADER-FONT-DARK); */
   cursor: default;
   padding: 1rem 0;
 }
@@ -108,13 +107,6 @@
   flex-direction: column;
 }
 /* MEDIA QUERIES */
-
-/* @media only screen and (max-width: 2560px) {
-  .sm-player-iframe {
-    width: 100%;
-    height: 70vh;
-  }
-} */
 
 @media only screen and (max-width: 1024px) {
   .sm-main-video-page {

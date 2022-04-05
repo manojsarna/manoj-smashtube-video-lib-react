@@ -7,7 +7,7 @@ export function Search({ searchMob }) {
   const [searchString, setSearchString] = useState("");
   const navigate = useNavigate();
 
-  const searchHandler = (event) => {
+  const searchHandler = () => {
     navigate(`/videos/?search=${searchString}`);
     setSearchString("");
   };

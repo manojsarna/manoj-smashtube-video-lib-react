@@ -1,7 +1,6 @@
 import { v4 as uuid } from "uuid";
 
 export const toastReducer = (state, action) => {
-  //const initialState = [];
   switch (action.type) {
     case "TOAST_SUCCESS":
       return [

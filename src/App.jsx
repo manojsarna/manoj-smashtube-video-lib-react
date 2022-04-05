@@ -4,7 +4,6 @@ import MockAPI from "./Mockman";
 import { Header, Footer, PrivateRoute, RestrictedRoute } from "./components";
 import {
   Auth,
-  CategoryPage,
   History,
   Home,
   Likes,
@@ -27,7 +26,6 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/videos" element={<Videos />} />
         <Route path="/videos/:videoId" element={<VideoPage />} />
-        <Route path="/categories/:categoryId" element={<CategoryPage />} />
         <Route element={<PrivateRoute />}>
           <Route path="/user" element={<User />} />
           <Route path="/history" element={<History />} />
@@ -39,6 +37,7 @@ function App() {
         <Route element={<RestrictedRoute />}>
           <Route path="/auth" element={<Auth />} />
         </Route>
+
         <Route path="/mockman" element={<MockAPI />} />
         <Route path="*" element={<Page404 />} />
       </Routes>

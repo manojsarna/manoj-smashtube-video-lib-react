@@ -6,20 +6,20 @@ import { useDocTitle } from "../../hooks/useDocTitle";
 import { useState, useEffect } from "react";
 import { formatDateToTime, searchVideos } from "../../hooks";
 import { useLocation } from "react-router-dom";
-//import { useLocation } from "react-router-dom";
 
 export function Videos() {
   useDocTitle("Videos - SmashTube - Manoj Sarna");
+  const { search } = useLocation();
+  const searchString = new URLSearchParams(search).get("search");
+  const categoryString = new URLSearchParams(search).get("category");
   const [videos, setVideos] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [curCat, setCurCat] = useState("all");
-  const [catVideos, SetCatVideos] = useState([]);
+  const [currentCategory, setCurrentCategory] = useState(
+    categoryString ?? "all"
+  );
+  const [filteredVideos, SetFilteredVideos] = useState([]);
   const [loading, setLoading] = useState();
   const [isSortByLatest, setIsSortByLatest] = useState(false);
-
-  const { search } = useLocation();
-
-  const searchString = new URLSearchParams(search).get("search");
 
   useEffect(() => {
     (async function () {
@@ -27,7 +27,14 @@ export function Videos() {
         setLoading(true);
         const { data } = await axios.get("/api/videos");
         setVideos(data.videos);
-        SetCatVideos(data.videos);
+        if (categoryString) {
+          setCurrentCategory(categoryString);
+          SetFilteredVideos(
+            data.videos.filter((v) => v.snippet.category === categoryString)
+          );
+        } else {
+          SetFilteredVideos(data.videos);
+        }
         const { data: data1 } = await axios.get("/api/categories");
         setCategories(data1.categories);
         setLoading(false);
@@ -35,10 +42,11 @@ export function Videos() {
         console.error(error);
       }
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    SetCatVideos(searchVideos(videos, searchString));
+    SetFilteredVideos(searchVideos(videos, searchString));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchString]);
 
@@ -53,19 +61,19 @@ export function Videos() {
             <button
               key={category._id}
               className={`sm-category-outline-btn   ${
-                category.category === curCat ? "sm-active" : ""
+                category.category === currentCategory ? "sm-active" : ""
               }`}
               onClick={() => {
                 if (category.category === "all") {
-                  SetCatVideos(videos);
+                  SetFilteredVideos(videos);
                 } else {
-                  SetCatVideos(
+                  SetFilteredVideos(
                     videos.filter(
                       (v) => v.snippet.category === category.category
                     )
                   );
                 }
-                setCurCat(category.category);
+                setCurrentCategory(category.category);
               }}
             >
               {category.categoryName}
@@ -78,7 +86,7 @@ export function Videos() {
             }`}
             onClick={() => {
               if (isSortByLatest) {
-                SetCatVideos((v) => [
+                SetFilteredVideos((v) => [
                   ...v.sort(
                     (a, b) =>
                       formatDateToTime(a.snippet.publishedAt) -
@@ -88,7 +96,7 @@ export function Videos() {
                 setIsSortByLatest(false);
               } else {
                 setIsSortByLatest(true);
-                SetCatVideos((v) => [
+                SetFilteredVideos((v) => [
                   ...v.sort(
                     (a, b) =>
                       formatDateToTime(b.snippet.publishedAt) -
@@ -102,7 +110,7 @@ export function Videos() {
           </button>
         </div>
         <div className="sm-main-prod-container">
-          {catVideos.map((video) => (
+          {filteredVideos.map((video) => (
             <Card key={video.id} video={video} />
           ))}
         </div>
