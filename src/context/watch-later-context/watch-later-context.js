@@ -2,19 +2,20 @@ import { useContext, useState, createContext } from "react";
 import { useEffect } from "react";
 import { useToast } from "../toast-context/toast-context";
 import axios from "axios";
+import { useAuth } from "../auth-context/auth-context";
 
 const WatchLaterContext = createContext();
 
 const useWatchLater = () => useContext(WatchLaterContext);
 
 function WatchLaterProvider({ children }) {
-  const encodedToken = localStorage.getItem("smashTubeToken");
+  const { encodedToken } = useAuth();
   const [watchLater, setWatchLater] = useState([]);
   const { dispatch } = useToast();
 
   useEffect(() => {
-    (async function () {
-      if (encodedToken) {
+    if (encodedToken) {
+      (async function () {
         try {
           const watchLaterResponse = await axios.get("/api/user/watchlater", {
             headers: {
@@ -28,8 +29,8 @@ function WatchLaterProvider({ children }) {
         } catch (error) {
           console.error(error.response.data.errors);
         }
-      }
-    })();
+      })();
+    }
   }, [encodedToken]);
 
   const addToWatchLater = async (item) => {

@@ -2,20 +2,21 @@ import { useContext, useState, createContext } from "react";
 import { useEffect } from "react";
 import { useToast } from "../toast-context/toast-context";
 import axios from "axios";
+import { useAuth } from "../auth-context/auth-context";
 
 const PlaylistsContext = createContext();
 
 const usePlaylists = () => useContext(PlaylistsContext);
 
 function PlaylistsProvider({ children }) {
-  const encodedToken = localStorage.getItem("smashTubeToken");
   const [playlists, setPlaylists] = useState([]);
   const [playlist, setPlaylist] = useState();
   const { dispatch } = useToast();
+  const { encodedToken } = useAuth();
 
   useEffect(() => {
-    (async function () {
-      if (encodedToken) {
+    if (encodedToken) {
+      (async function () {
         try {
           const playlistsResponse = await axios.get("/api/user/playlists", {
             headers: {
@@ -29,16 +30,12 @@ function PlaylistsProvider({ children }) {
         } catch (error) {
           console.error(error.response.data.errors);
         }
-      }
-    })();
+      })();
+    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [encodedToken, playlist]);
 
-  // useEffect(() => {
-  //   console.log(playlists);
-  //   console.log(playlists);
-  // }, [playlists, playlist]);
   /**
    *
    * addToPlaylists : This API call will create a new playlist
@@ -54,7 +51,6 @@ function PlaylistsProvider({ children }) {
           },
         }
       );
-
       if (response.status === 201) {
         dispatch({
           type: "TOAST_SUCCESS",

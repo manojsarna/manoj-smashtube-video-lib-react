@@ -1,6 +1,7 @@
 .sm-toast-container {
   top: 8rem;
   gap: 5px;
+  z-index: 60;
 }
 .sm-notification {
   padding: 12px;

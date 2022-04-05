@@ -10,7 +10,7 @@ export function Videos() {
   const [videos, setVideos] = useState([]);
   const [categories, setCategories] = useState([]);
   const [curCat, setCurCat] = useState("all");
-  const [fVid, SetFVid] = useState([]);
+  const [catVideos, SetCatVideos] = useState([]);
   const [loading, setLoading] = useState();
   // const { pathname } = useLocation();
 
@@ -24,7 +24,7 @@ export function Videos() {
         setLoading(true);
         const { data } = await axios.get("/api/videos");
         setVideos(data.videos);
-        SetFVid(data.videos);
+        SetCatVideos(data.videos);
         const { data: data1 } = await axios.get("/api/categories");
         setCategories(data1.categories);
         setLoading(false);
@@ -49,9 +49,9 @@ export function Videos() {
               }`}
               onClick={() => {
                 if (category.category === "all") {
-                  SetFVid(videos);
+                  SetCatVideos(videos);
                 } else {
-                  SetFVid(
+                  SetCatVideos(
                     videos.filter(
                       (v) => v.snippet.category === category.category
                     )
@@ -65,7 +65,7 @@ export function Videos() {
           ))}
         </div>
         <div className="sm-main-prod-container">
-          {fVid.map((video) => (
+          {catVideos.map((video) => (
             <Card key={video.id} video={video} />
           ))}
         </div>
