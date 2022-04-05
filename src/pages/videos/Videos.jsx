@@ -16,6 +16,7 @@ export function Videos() {
   const [videos, setVideos] = useState([]);
   const [categories, setCategories] = useState([]);
   const [currentCategory, setCurrentCategory] = useState(categoryString);
+  const [currentSearchString] = useState(searchString);
   const [filteredVideos, SetFilteredVideos] = useState([]);
   const [loading, setLoading] = useState();
   const [isSortByLatest, setIsSortByLatest] = useState(false);
@@ -32,7 +33,6 @@ export function Videos() {
         if (searchString) {
           SetFilteredVideos([...searchVideos(data.videos, searchString)]);
         }
-
         const { data: data1 } = await axios.get("/api/categories");
         setCategories(data1.categories);
         setLoading(false);
@@ -44,9 +44,9 @@ export function Videos() {
   }, []);
 
   useEffect(() => {
-    SetFilteredVideos([...searchVideos(videos, searchString)]);
+    SetFilteredVideos([...searchVideos(videos, currentSearchString)]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchString]);
+  }, [currentSearchString]);
 
   useEffect(() => {
     SetFilteredVideos([
