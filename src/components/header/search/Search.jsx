@@ -9,7 +9,7 @@ export function Search({ searchMob }) {
 
   const searchHandler = () => {
     navigate(`/videos/?search=${searchString}`);
-    setSearchString("");
+    //setSearchString("");
   };
 
   return (
