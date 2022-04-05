@@ -18,13 +18,11 @@ Smash Tube - Video Library App using [Smash UI](https://smashui.netlify.app/) an
 
 ---
 
-## Live Demo: [SmashTube](https://smashcart.netlify.app/)
+## Live Demo: [SmashTube](https://smashtube.netlify.app/)
 
 ---
 
 ## Video Demo:
-
-https://user-images.githubusercontent.com/79917843/154931357-1229388a-4cff-4951-bdfa-e77bbd6f1e36.mp4
 
 ---
 
