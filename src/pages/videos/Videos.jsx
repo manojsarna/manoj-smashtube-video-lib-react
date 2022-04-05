@@ -4,7 +4,7 @@ import axios from "axios";
 import { Card, Loader } from "../../components";
 import { useDocTitle } from "../../hooks/useDocTitle";
 import { useState, useEffect } from "react";
-import { formatDateToTime, searchVideos } from "../../hooks";
+import { filterSortVideos, searchVideos } from "../../hooks";
 import { useLocation } from "react-router-dom";
 
 export function Videos() {
@@ -12,6 +12,7 @@ export function Videos() {
   const { search } = useLocation();
   const searchString = new URLSearchParams(search).get("search");
   const categoryString = new URLSearchParams(search).get("category");
+
   const [videos, setVideos] = useState([]);
   const [categories, setCategories] = useState([]);
   const [currentCategory, setCurrentCategory] = useState(
@@ -20,7 +21,7 @@ export function Videos() {
   const [filteredVideos, SetFilteredVideos] = useState([]);
   const [loading, setLoading] = useState();
   const [isSortByLatest, setIsSortByLatest] = useState(false);
-
+  console.log(isSortByLatest, currentCategory);
   useEffect(() => {
     (async function () {
       try {
@@ -50,6 +51,13 @@ export function Videos() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchString]);
 
+  useEffect(() => {
+    SetFilteredVideos(
+      filterSortVideos(videos, currentCategory, isSortByLatest)
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentCategory, isSortByLatest]);
+
   return loading ? (
     <Loader show={loading} />
   ) : (
@@ -63,18 +71,7 @@ export function Videos() {
               className={`sm-category-outline-btn   ${
                 category.category === currentCategory ? "sm-active" : ""
               }`}
-              onClick={() => {
-                if (category.category === "all") {
-                  SetFilteredVideos(videos);
-                } else {
-                  SetFilteredVideos(
-                    videos.filter(
-                      (v) => v.snippet.category === category.category
-                    )
-                  );
-                }
-                setCurrentCategory(category.category);
-              }}
+              onClick={() => setCurrentCategory(category.category)}
             >
               {category.categoryName}
             </button>
@@ -84,27 +81,7 @@ export function Videos() {
             className={`sm-category-outline-btn ${
               isSortByLatest ? "sm-active" : ""
             }`}
-            onClick={() => {
-              if (isSortByLatest) {
-                SetFilteredVideos((v) => [
-                  ...v.sort(
-                    (a, b) =>
-                      formatDateToTime(a.snippet.publishedAt) -
-                      formatDateToTime(b.snippet.publishedAt)
-                  ),
-                ]);
-                setIsSortByLatest(false);
-              } else {
-                setIsSortByLatest(true);
-                SetFilteredVideos((v) => [
-                  ...v.sort(
-                    (a, b) =>
-                      formatDateToTime(b.snippet.publishedAt) -
-                      formatDateToTime(a.snippet.publishedAt)
-                  ),
-                ]);
-              }
-            }}
+            onClick={() => setIsSortByLatest((value) => !value)}
           >
             Sort By Latest
           </button>
