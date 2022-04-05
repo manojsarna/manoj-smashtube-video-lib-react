@@ -13,12 +13,6 @@ export function User() {
             {`${user.firstName[0].toUpperCase()}${user.lastName[0].toUpperCase()}'s `}
             Profile Page
           </p>
-          {/* <button
-            className="btn btn-primary btn-bolder create-playlist-button"
-            title="Logout Now"
-          >
-            Logout
-          </button> */}
         </div>
         <div className="sm-user-profile-info">
           <div className="sm-user-card">

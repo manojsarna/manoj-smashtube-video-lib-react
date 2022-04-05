@@ -10,6 +10,7 @@ import {
   PlaylistsAddNewIcon,
 } from "../../components/header/icons";
 import { useState, useEffect } from "react";
+import { formatViewsString } from "../../hooks";
 
 export function VideoPage() {
   useDocTitle("Video Page - SmashTube - Manoj Sarna");
@@ -17,6 +18,7 @@ export function VideoPage() {
   const [loading, setLoading] = useState(true);
   const [videos, setVideos] = useState();
   const [videoDetails, setVideoDetails] = useState();
+  const [played, setPlayed] = useState(false);
   const [show, setShow] = useState(false);
   useEffect(() => {
     let timeout;
@@ -37,6 +39,7 @@ export function VideoPage() {
       }
     })();
     return () => clearTimeout(timeout);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [videoId]);
 
   const { pathname } = useLocation();
@@ -51,14 +54,24 @@ export function VideoPage() {
     <main className="sm-main-video-page">
       <div className="sm-video-container">
         <div className="sm-video-container-main">
-          <SmashPlayer videoId={videoId} videoDetails={videoDetails} />
+          <SmashPlayer
+            videoId={videoId}
+            videoDetails={videoDetails}
+            played={played}
+            setPlayed={setPlayed}
+          />
           <div className="sm-smash-player-title">
             {videoDetails.snippet.title}
           </div>
           <div className="sm-smash-player-cta-info">
             <div className="sm-smash-player-info">
               <span className="sm-smash-player-info-views">
-                {videoDetails.snippet.viewsCount} views
+                {played
+                  ? formatViewsString(
+                      Number(videoDetails.statistics.viewCount) + 1
+                    )
+                  : formatViewsString(videoDetails.statistics.viewCount)}{" "}
+                views
               </span>
               <span className="sm-smash-player-info-dot"></span>
 
@@ -81,10 +94,10 @@ export function VideoPage() {
             />
           </div>
           <div className="sm-smash-player-channel-name">
-            <span className="fw-700">
-              {videoDetails.snippet.videoOwnerChannelTitle}
+            <span className="fw-700">{videoDetails.snippet.channelTitle}</span>
+            <span>
+              {videoDetails.snippet.channelSubscribersCount} subscribers
             </span>
-            <span>983K subscribers</span>
           </div>
         </div>
         <div className="sm-video-container-main-desc">

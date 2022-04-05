@@ -1,7 +1,7 @@
 import { v4 as uuid } from "uuid";
 
 export const toastReducer = (state, action) => {
-  const initialState = [];
+  //const initialState = [];
   switch (action.type) {
     case "TOAST_SUCCESS":
       return [
@@ -16,7 +16,7 @@ export const toastReducer = (state, action) => {
       ];
 
     case "TOAST_RESET":
-      return initialState;
+      return [...state].filter((item) => item._id !== action.payload);
 
     default:
       throw new Error(`Unhandled action type: ${action.type}`);

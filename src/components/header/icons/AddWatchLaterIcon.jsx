@@ -34,7 +34,9 @@ export function AddWatchLaterIcon({ videoDetails }) {
       }`}
     >
       <div className="icon icon-video">
-        <i className={`fa-clock ${videoInWatchLater ? "fas" : "far"}`}></i>
+        <i
+          className={`fa-clock ${videoInWatchLater && user ? "fas" : "far"}`}
+        ></i>
         <span>
           {"  "}
           WATCH

@@ -1,8 +1,11 @@
 import "./videos.css";
+import { v4 as uuid } from "uuid";
 import axios from "axios";
 import { Card, Loader } from "../../components";
 import { useDocTitle } from "../../hooks/useDocTitle";
 import { useState, useEffect } from "react";
+import { formatDateToTime, searchVideos } from "../../hooks";
+import { useLocation } from "react-router-dom";
 //import { useLocation } from "react-router-dom";
 
 export function Videos() {
@@ -12,11 +15,11 @@ export function Videos() {
   const [curCat, setCurCat] = useState("all");
   const [catVideos, SetCatVideos] = useState([]);
   const [loading, setLoading] = useState();
-  // const { pathname } = useLocation();
+  const [isSortByLatest, setIsSortByLatest] = useState(false);
 
-  // useEffect(() => {
-  //   window.scrollTo(0, 0);
-  // }, [pathname]);
+  const { search } = useLocation();
+
+  const searchString = new URLSearchParams(search).get("search");
 
   useEffect(() => {
     (async function () {
@@ -33,6 +36,11 @@ export function Videos() {
       }
     })();
   }, []);
+
+  useEffect(() => {
+    SetCatVideos(searchVideos(videos, searchString));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchString]);
 
   return loading ? (
     <Loader show={loading} />
@@ -63,6 +71,35 @@ export function Videos() {
               {category.categoryName}
             </button>
           ))}
+          <button
+            key={uuid()}
+            className={`sm-category-outline-btn ${
+              isSortByLatest ? "sm-active" : ""
+            }`}
+            onClick={() => {
+              if (isSortByLatest) {
+                SetCatVideos((v) => [
+                  ...v.sort(
+                    (a, b) =>
+                      formatDateToTime(a.snippet.publishedAt) -
+                      formatDateToTime(b.snippet.publishedAt)
+                  ),
+                ]);
+                setIsSortByLatest(false);
+              } else {
+                setIsSortByLatest(true);
+                SetCatVideos((v) => [
+                  ...v.sort(
+                    (a, b) =>
+                      formatDateToTime(b.snippet.publishedAt) -
+                      formatDateToTime(a.snippet.publishedAt)
+                  ),
+                ]);
+              }
+            }}
+          >
+            Sort By Latest
+          </button>
         </div>
         <div className="sm-main-prod-container">
           {catVideos.map((video) => (

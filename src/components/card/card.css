@@ -7,6 +7,9 @@
   border: none;
   box-shadow: none;
   border-radius: 10px;
+  box-shadow: 0px 4px 5px 0px hsl(0deg 0% 0% / 14%),
+    0px 1px 10px 0px hsl(0deg 0% 0% / 12%),
+    0px 2px 4px -1px hsl(0deg 0% 0% / 20%);
 }
 .sm-card .sm-card-img {
   padding: 1.4rem 0;
@@ -17,6 +20,8 @@
 
 .sm-card .sm-card-img {
   border-bottom: none;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 .sm-card .sm-badge {
   border-radius: 10px 0px;
@@ -41,11 +46,12 @@
 }
 .sm-card-flex-rating .sm-card-rating {
   margin-left: 0;
-  color: var(--COLOR-HEADER-FONT-DARK);
+  color: var(--COLOR-GREY-TEXT);
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1.4rem;
+  font-weight: 600;
 }
 .sm-card-info .sm-card-info-price {
   font-weight: 800;
