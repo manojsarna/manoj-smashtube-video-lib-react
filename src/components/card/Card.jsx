@@ -1,5 +1,5 @@
 import "./card.css";
-import { formatDate } from "../../hooks/formatDate";
+import { formatDate, formatViews, formatDuration } from "../../hooks";
 import { NavLink, useNavigate } from "react-router-dom";
 import {
   useAuth,
@@ -12,7 +12,7 @@ import { PlaylistModal } from "../playlist-modal/PlaylistModal";
 import { useState } from "react";
 
 export function Card({ video, type }) {
-  const { addToHistory, deleteFromHistory } = useHistory();
+  const { deleteFromHistory } = useHistory();
 
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -23,10 +23,10 @@ export function Card({ video, type }) {
 
   const { playlist, removeFromPlaylist } = usePlaylists();
 
-  const videoInWatchLater = watchLater?.some((v) => v._id === video._id)
+  const isVideoInWatchLater = watchLater?.some((v) => v._id === video._id)
     ? true
     : false;
-  const videoInLikes = likes?.some((v) => v._id === video._id) ? true : false;
+  const isVideoInLikes = likes?.some((v) => v._id === video._id) ? true : false;
 
   return (
     <>
@@ -59,43 +59,55 @@ export function Card({ video, type }) {
             ""
           )}
 
-          <span className="sm-card-bage-time">7:52</span>
+          <span className="sm-card-bage-time">
+            {formatDuration(video.contentDetails.duration)}
+          </span>
 
           <button
             className="sm-card-fav-watch"
             title={`${
-              videoInWatchLater
+              isVideoInWatchLater
                 ? "Remove From Watch Later"
                 : "Add To Watch Later"
             }`}
             onClick={() => {
               if (!user) {
                 navigate("/auth");
-              } else if (videoInWatchLater) {
+              } else if (isVideoInWatchLater) {
                 removeFromWatchLater(video);
               } else {
                 addToWatchLater(video);
               }
             }}
           >
-            <i className={`fa-clock ${videoInWatchLater ? "fas" : "far"}`}></i>
+            <i
+              className={`fa-clock ${
+                isVideoInWatchLater && user ? "fas" : "far"
+              }`}
+            ></i>
           </button>
           <button
             className="sm-card-bage-like-btn"
             title={`${
-              videoInLikes ? "Remove From Liked Videos" : "Add To Liked Videos"
+              isVideoInLikes
+                ? "Remove From Liked Videos"
+                : "Add To Liked Videos"
             }`}
             onClick={() => {
               if (!user) {
                 navigate("/auth");
-              } else if (videoInLikes) {
+              } else if (isVideoInLikes) {
                 removeFromLikes(video);
               } else {
                 addToLikes(video);
               }
             }}
           >
-            <i className={`fa-thumbs-up ${videoInLikes ? "fas" : "far"}`}></i>
+            <i
+              className={`fa-thumbs-up ${
+                isVideoInLikes && user ? "fas" : "far"
+              }`}
+            ></i>
           </button>
 
           <button
@@ -117,12 +129,12 @@ export function Card({ video, type }) {
           <h2 className="sm-card-content-brand" title="Click On Watch Now!!">
             <p className="sm-card-flex-rating">
               <span className="sm-card-rating">
-                by {video.snippet.videoOwnerChannelTitle}
+                by {video.snippet.channelTitle}
               </span>
             </p>
             <p className="sm-card-flex-rating">
               <span className="sm-card-rating">
-                {video.snippet.viewsCount} views
+                {formatViews(video.statistics.viewCount)} views
               </span>
               &nbsp;&nbsp;<span className="sm-card-rating-dot"></span>
               &nbsp;&nbsp;
@@ -135,13 +147,10 @@ export function Card({ video, type }) {
           <div className="sm-card-info">
             <NavLink
               className="sm-link-new-check"
-              to={`/videos/${video.snippet.resourceId.videoId}`}
+              to={`/videos/${video._id}`}
               title="Go To Video"
             >
-              <button
-                className="btn btn-primary cart-btn"
-                onClick={() => (user ? addToHistory(video) : "")}
-              >
+              <button className="btn btn-primary cart-btn">
                 <i className="fas fa-play"></i>
                 &nbsp;&nbsp;Watch Now
               </button>

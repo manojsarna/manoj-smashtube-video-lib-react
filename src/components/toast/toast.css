@@ -2,10 +2,12 @@
   top: 8rem;
   gap: 5px;
   z-index: 60;
+  opacity: 1;
 }
 .sm-notification {
   padding: 12px;
   font-size: 1.6rem;
+  transition: all ease-in 0.2s;
 }
 .sm-notification .sm-alert-icon {
   margin: 0;

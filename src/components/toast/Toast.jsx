@@ -1,4 +1,19 @@
+import { useEffect } from "react";
+import { useToast } from "../../context";
+
 export function Toast({ toast }) {
+  const { dispatch } = useToast();
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      dispatch({
+        type: "TOAST_RESET",
+        payload: toast._id,
+      });
+    }, 2000);
+    return () => clearTimeout(timeout);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [toast._id]);
+
   return (
     <div
       className={`sm-notification ${
@@ -15,9 +30,6 @@ export function Toast({ toast }) {
         ></i>
       </span>
       <span>{toast.message}</span>
-      {/* <span className="sm-close-icon" onClick={closeHandler}>
-        <i className="fas fa-times"></i>
-      </span> */}
     </div>
   );
 }

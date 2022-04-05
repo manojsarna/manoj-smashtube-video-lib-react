@@ -19,23 +19,23 @@ makeServer();
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider>
-      <ToastProvider>
-        <AuthProvider>
-          <PlaylistsProvider>
-            <HistoryProvider>
-              <LikesProvider>
-                <WatchLaterProvider>
-                  <Router>
+    <Router>
+      <ThemeProvider>
+        <ToastProvider>
+          <AuthProvider>
+            <PlaylistsProvider>
+              <HistoryProvider>
+                <LikesProvider>
+                  <WatchLaterProvider>
                     <App />
-                  </Router>
-                </WatchLaterProvider>
-              </LikesProvider>
-            </HistoryProvider>
-          </PlaylistsProvider>
-        </AuthProvider>
-      </ToastProvider>
-    </ThemeProvider>
+                  </WatchLaterProvider>
+                </LikesProvider>
+              </HistoryProvider>
+            </PlaylistsProvider>
+          </AuthProvider>
+        </ToastProvider>
+      </ThemeProvider>
+    </Router>
   </React.StrictMode>,
   document.getElementById("root")
 );

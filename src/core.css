@@ -24,7 +24,6 @@
   --COLOR-GREEN: #85a428;
 
   --COLOR-CODE-BG: #011627;
-
   --COLOR-BG-WHITE: #ffffff;
   --COLOR-BG-LIGHTGREEN: #f1ffeb;
   --COLOR-BG-DARK: #07090a;
@@ -143,6 +142,7 @@ html[data-theme="light"] {
   --COLOR-HEADER-FONT-DARK: #11a300;
   --COLOR-HEADER-FONT-DARK-HOVER: #5ef046;
   --COLOR-CODE-BG: #0b1120;
+  --COLOR-GREY-TEXT: #606060;
 }
 
 html[data-theme="dark"] {
@@ -153,6 +153,7 @@ html[data-theme="dark"] {
   --COLOR-HEADER-FONT-DARK: #44d62c;
   --COLOR-HEADER-FONT-DARK-HOVER: #73e161;
   --COLOR-CODE-BG: #0b1120;
+  --COLOR-GREY-TEXT: #aaa;
 }
 
 input,

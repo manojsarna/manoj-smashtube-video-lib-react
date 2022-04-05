@@ -63,8 +63,6 @@
   outline: none;
 }
 
-/* .sm-playlist-delete-btn :hover {
-} */
 .sm-playlist-delete-btn :active {
   transform: scale(0.95);
 }

@@ -24,7 +24,10 @@ function AuthProvider({ children }) {
             setUser(response.data.foundUser);
           }
         } catch (error) {
-          console.log(error);
+          dispatch({
+            type: "TOAST_ERROR",
+            payload: error.response.data.errors,
+          });
         }
       })();
     }

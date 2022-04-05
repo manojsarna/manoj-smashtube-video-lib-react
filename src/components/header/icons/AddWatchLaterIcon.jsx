@@ -20,21 +20,14 @@ export function AddWatchLaterIcon({ videoDetails }) {
           addToWatchLater(videoDetails);
         }
       }}
-      // onClick={
-      //   videoInWatchLater
-      //     ? () => {
-      //         removeFromWatchLater(videoDetails);
-      //       }
-      //     : () => {
-      //         addToWatchLater(videoDetails);
-      //       }
-      // }
       title={`${
         videoInWatchLater ? "Remove From Watch Later" : "Add To Watch Later"
       }`}
     >
       <div className="icon icon-video">
-        <i className={`fa-clock ${videoInWatchLater ? "fas" : "far"}`}></i>
+        <i
+          className={`fa-clock ${videoInWatchLater && user ? "fas" : "far"}`}
+        ></i>
         <span>
           {"  "}
           WATCH
