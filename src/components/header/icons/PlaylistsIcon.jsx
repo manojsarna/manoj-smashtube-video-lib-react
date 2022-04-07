@@ -9,16 +9,10 @@ export function PlaylistsIcon() {
       <button className="sm-icon-btn color-dm sm-icon-btn-primary">
         <div className="icon">
           <i className="fas fa-list"></i>
-          {user ? (
-            playlists.length === 0 ? (
-              ""
-            ) : (
-              <span className="icon-badge bd-red icon-bd-top-right ">
-                {playlists.length}
-              </span>
-            )
-          ) : (
-            ""
+          {user && playlists.length !== 0 && (
+            <span className={`icon-badge bd-red icon-bd-top-right `}>
+              {playlists.length}
+            </span>
           )}
         </div>
       </button>

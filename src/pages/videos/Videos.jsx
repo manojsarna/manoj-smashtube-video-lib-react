@@ -5,14 +5,13 @@ import { Card, Loader } from "../../components";
 import { useDocTitle } from "../../hooks/useDocTitle";
 import { useState, useEffect } from "react";
 import { filterSortVideos, searchVideos } from "../../hooks";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export function Videos() {
   useDocTitle("Videos - SmashTube - Manoj Sarna");
   const { search } = useLocation();
   const searchString = new URLSearchParams(search).get("search");
   const categoryString = new URLSearchParams(search).get("category");
-  const navigate = useNavigate();
   const [videos, setVideos] = useState([]);
   const [categories, setCategories] = useState([]);
   const [currentCategory, setCurrentCategory] = useState(categoryString);
@@ -22,7 +21,6 @@ export function Videos() {
   useEffect(() => {
     (async function () {
       try {
-        //navigate("/videos");
         setLoading(true);
         const { data } = await axios.get("/api/videos");
         setVideos(data.videos);

@@ -11,7 +11,6 @@ export function PlaylistsAddNewIcon({ setShow }) {
       onClick={() => {
         user ? setShow((p) => !p) : navigate("/auth");
       }}
-      // onClick={() => setShow((p) => !p)}
     >
       <div className="icon icon-video">
         <i className="far fa-list-alt"></i>
