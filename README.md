@@ -1,10 +1,10 @@
-## Smash Tube App using Smash UI and React
+## SmashTube App using Smash UI , React.js and MockBee (MockBackend)
 
 <div align="center">
 
 <img alt="badminton" src="/public/logo192.png" width="1048px" height="238px" />
 
-Smash Tube - Video Library App using [Smash UI](https://smashui.netlify.app/) and React.js
+SmashTube - Video Library App using [Smash UI](https://smashui.netlify.app/) , React.js and MockBee (MockBackend)
 
 [![GitHub followers](https://img.shields.io/github/followers/manojsarna?style=social)](https://github.com/manojsarna)
 &emsp;
@@ -22,32 +22,53 @@ Smash Tube - Video Library App using [Smash UI](https://smashui.netlify.app/) an
 
 ---
 
-## Video Demo:
+## Video Demo of SmashTube
+
+https://user-images.githubusercontent.com/45617406/162269763-e850adb1-05af-4c68-b250-8a012699d0d6.mp4
 
 ---
 
 ## Quick Start
 
-To start using the SmashCart you can visit the following link :
+To start using the SmashTube you can visit the following link : [SmashTube](https://smashtube.netlify.app/)
 
-### P0 Screens
+### P0 Features
 
-- [Home Page](https://smashcart.netlify.app/)
-- [Product Listing Page](https://smashcart.netlify.app/lib/components/products/products.html)
-- [Filters - Price, Category, Ratings](https://smashcart.netlify.app/lib/components/products/products.html)
-- [Cart Management](https://smashcart.netlify.app/lib/components/cart/cart.html)
-- [Wishlist Management](https://smashcart.netlify.app/lib/components/wishlist/wishlist.html)
-- [Authentication](https://smashcart.netlify.app/lib/components/auth/auth.html)
+- [Home Page](https://smashtube.netlify.app/)
+- [Video Listing Page](https://smashtube.netlify.app/)
+- [Playlist Management](https://smashtube.netlify.app/)
+- [Like/Dislike](https://smashtube.netlify.app/)
+- [Watch Later](https://smashtube.netlify.app/)
+- [Watched History](https://smashtube.netlify.app/)
+- [Authentication -SignUp, Login, Logout](https://smashtube.netlify.app/)
 
-#### P1 Screens
+#### P1 Features
 
-- [Search](https://smashcart.netlify.app/)
-- [Checkout](https://smashcart.netlify.app/lib/components/cart/cart.html)
+- [Search for Videos](https://smashtube.netlify.app/)
+- [Single Video Page](https://smashtube.netlify.app/)
+- [Filter Videos with Categories](https://smashtube.netlify.app/)
+- [Loading & Alerts](https://smashtube.netlify.app/)
+- [User Profile Page](https://smashtube.netlify.app/)
 
-### Features Added
+#### P2 Features
 
-- Responsive Site (Both desktop and mobile responsive)
+- [Sort by Latest Videos](https://smashtube.netlify.app/)
+- [Custom Video View Count](https://smashtube.netlify.app/)
+- [Custom Video Likes](https://smashtube.netlify.app/)
+
+### Extra Features Added
+
+- Custom Toasts with Toast Container
+- Custom Carousel
+- Responsive Site (Both Desktop and Mobile Responsive)
 - Persisting Dark / Light Mode
+- CTAs on Footer in Mobile View
+- Liked Videos Management - (Add / Remove from Liked Videos)
+- Watch Later Videos Management (Add / Remove from Watch Later)
+- Proper Landing page with Featured Categories and Most Watched Videos
+- Search for Videos from any page
+- Videos Listing Page with Filter Videos - Category
+- Videos Listing Page with Sort Videos - Sort By Latest
 
 ---
 
